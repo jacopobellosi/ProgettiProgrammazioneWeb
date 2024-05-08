@@ -17,10 +17,28 @@
 <body>
 	<?php
 	include '../Extra/header.html';
-	include '../Extra/nav.html';
 	include '../Extra/footer.html';
 	include '../DB/dbManager.php';
 	include '../DB/connDb.php';
+
+	$Numero = "";
+	$CodUtenza  = "";
+	$Data = "";
+	$Valore  = "";
+	$NumFattura = "";
+	if (count($_POST) > 0) {
+		$Numero = $_POST["Numero"];
+		$CodUtenza = $_POST["CodUtenza"];
+		$Data = $_POST["Data"];
+		$Valore = $_POST["Valore"];
+		$NumFattura = $_POST["NumFattura"];
+	} else if (count($_GET) > 0) {
+		$Numero = $_GET["Numero"];
+		$CodUtenza = $_GET["CodUtenza"];
+		$Data = $_GET["Data"];
+		$Valore = $_GET["Valore"];
+		$NumFattura = $_GET["NumFattura"];
+	}
 	?>
 
 	<div class="main">
@@ -29,35 +47,21 @@
 		?>
 		<div id="content">
 			<h2>Letture</h2>
+			<hr>
+			<h4>Filtri:</h4>
 			<form name="myform" method="POST">
-				<input id="Numero" name="Numero" type="text" placeholder="Numero" />
-				<input id="CodUtenza" name="CodUtenza" type="text" placeholder="CodUtenza" />
-				<input id="Data" name="Data" type="text" placeholder="Data" />
-				<input id="Valore" name="Valore" type="text" placeholder="Valore" />
-				<input id="NumerFattura" name="NumerFattura" type="text" placeholder="NumerFattura" />
+				<input id="Numero" name="Numero" type="text" placeholder="Numero"  value="<?php echo $Numero; ?>"/>
+				<input id="CodUtenza" name="CodUtenza" type="text" placeholder="CodUtenza"  value="<?php echo $CodUtenza; ?>"/>
+				<input id="Data" name="Data" type="text" placeholder="Data"  value="<?php echo $Data; ?>"/> <br> <br>
+				<input id="Valore" name="Valore" type="text" placeholder="Valore"  value="<?php echo $Valore; ?>"/>
+				<input id="NumFattura" name="NumFattura" type="text" placeholder="NumFattura"  value="<?php echo $NumFattura; ?>"/>
 				<input type="submit" value="Cerca" />
 			</form>
+			<hr>
 
-			<div id="results">
+			<div id="results" class="tabella-scorrevole">
 				<?php
-				$Numero = "";
-				$CodUtenza  = "";
-				$Data = "";
-				$Valore  = "";
-				$NumFattura = "";
-				if (count($_POST) > 0) {
-					$Numero = $_POST["Numero"];
-					$CodUtenza = $_POST["CodUtenza"];
-					$Data = $_POST["Data"];
-					$Valore = $_POST["Valore"];
-					$NumFattura = $_POST["NumFattura"];
-				} else if (count($_GET) > 0) {
-					$Numero = $_GET["Numero"];
-					$CodUtenza = $_GET["CodUtenza"];
-					$Data = $_GET["Data"];
-					$Valore = $_GET["Valore"];
-					$NumFattura = $_GET["NumFattura"];
-				}
+
 				$query = getLettura($Numero, $CodUtenza, $Data, $Valore, $NumFattura);
 				echo "<p>getLettura: " . $query . "</p>";
 
@@ -73,11 +77,10 @@
 					<table class="table">
 						<tr class="header">
 							<th>Numero</th>
-							<!--th>id </th-->
-							<th>CodUtenza</th>
+							<th>Codice Utente</th>
 							<th>Data</th>
 							<th>Valore</th>
-							<th>NumFattura</th>
+							<th>Numero Fattura</th>
 						</tr>
 						<?php
 						$i = 0;
@@ -87,7 +90,7 @@
 							if ($i % 2 == 0) {
 								$classRiga = 'class="rowEven"';
 							}
-							$NumFattura = $riga["Numero"];
+							$Numero = $riga["Numero"];
 							$CodUtenza = $riga["CodUtenza"];
 							$Data = $riga["Data"];
 							$Valore = $riga["Valore"];
@@ -95,7 +98,7 @@
 
 						?>
 							<tr <?php echo $classRiga; ?>>
-								<td> <?php echo $NumFattura; ?> </td>
+								<td> <?php echo $Numero; ?> </td>
 								<td> <?php echo riferimentoUtenza($CodUtenza); ?> </td>
 								<td> <?php echo $Data; ?> </td>
 								<td> <?php echo $Valore; ?> </td>

@@ -30,33 +30,32 @@
     $DataCh  = "";
     if (count($_POST) > 0) {
         $Codice = $_POST["Codice"];
-        $DataAp = date('Y-m-d', strtotime($_POST["DataAp"]));
+        $DataAp = $_POST["DataAp"];
         $Indirizzo  = $_POST["Indirizzo"];
         $Citta = $_POST["Citta"];
         $CodCliente  = $_POST["CodCliente"];
-        if (isset($_POST["Attiva"])) {
+        if(isset($_POST["Attiva"]))  {
             $Attiva = 1;
+            $DataCh  = "";
         } else {
             $Attiva = 0;
+            $DataCh  = $_POST["DataCh"];
         }
 
-        if ($Attiva == 0) {
-            $DataCh = date('Y-m-d', strtotime($_POST["DataCh"]));
-            $query = "INSERT INTO Utenza (Codice, DataAp, Indirizzo, Città, CodCliente, Attiva, DataCh) 
-                      VALUES ('$Codice', '$DataAp', '$Indirizzo', '$Citta', '$CodCliente', '$Attiva', '$DataCh')";
-        } else {
-            $DataCh = "NULL";
-            $query = "INSERT INTO Utenza (Codice, DataAp, Indirizzo, Città, CodCliente, Attiva, DataCh) 
-                      VALUES ('$Codice', '$DataAp', '$Indirizzo', '$Citta', '$CodCliente', '$Attiva', $DataCh)";
-        }
-
-
-        try {
-            $conn->exec($query);
-            echo "<h3 class='msg'>Data inserted successfully.</h3>";
-        } catch (PDOException $e) {
-            echo "<h3 class='msg'>DB Error on Insert: " . $e->getMessage() . "</h3>";
-            $error = true;
+        if (controllo($Attiva, $DataCh)) {
+            $query = insertUtenze($DataAp, $Indirizzo, $Citta, $CodCliente, $Attiva, $DataCh);
+            try {
+                $result = $conn->query($query);
+            } catch (PDOException $e) {
+                echo "<h3>DB Error on Query: " . $e->getMessage() . "</h3>";
+                $error = true;
+            }
+            if (!$error) {
+                echo ("<script>alert('Inserimento andato a buon fine')</script>");
+                header('Location: ' . "Utenza.php");
+            } else {
+                echo ("<script>alert(" . $error . ")</script>");
+            }
         }
     }
     $query = "SELECT DISTINCT Codice FROM Cliente";

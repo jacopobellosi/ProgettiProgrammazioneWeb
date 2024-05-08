@@ -19,8 +19,6 @@
 	include 'Extra/footer.html';
 	?>
 
-	<link rel="icon" href="img/logo.jpeg" type="image"  alt="Logo" />
-
 	<div class="main">
 		<nav>
 			<ol>

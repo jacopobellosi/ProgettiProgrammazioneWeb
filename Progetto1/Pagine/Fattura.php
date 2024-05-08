@@ -20,6 +20,24 @@
 	include '../Extra/footer.html';
 	include '../DB/dbManager.php';
 	include '../DB/connDb.php';
+	$Numero = "";
+	$Data  = "";
+	$Imponibile = "";
+	$Iva  = "";
+	$Totale = "";
+	if (count($_POST) > 0) {
+		$Numero = $_POST["Numero"];
+		$Imponibile = $_POST["Imponibile"];
+		$Data = $_POST["Data"];
+		$Iva = $_POST["Iva"];
+		$Totale = $_POST["Totale"];
+	} else if (count($_GET) > 0) {
+		$Numero = $_GET["Numero"];
+		$Imponibile = $_GET["Imponibile"];
+		$Data = $_GET["Data"];
+		$Iva = $_GET["Iva"];
+		$Totale = $_GET["Totale"];
+	}
 	?>
 
 	<div class="main">
@@ -28,35 +46,21 @@
 		?>
 		<div id="content">
 			<h2>Fatture</h2>
+			<hr>
+			<h4>Filtri:</h4>
 			<form name="myform" method="POST">
-				<input id="Numero" name="Numero" type="text" placeholder="Numero" />
-				<input id="Data" name="Data" type="text" placeholder="Data" />
-				<input id="Imponibile" name="Imponibile" type="text" placeholder="Imponibile" />
-				<input id="Iva" name="Iva" type="text" placeholder="Iva" />
-				<input id="Totale" name="Totale" type="text" placeholder="Totale" />
+				<input id="Numero" name="Numero" type="text" placeholder="Numero" value="<?php echo $Numero; ?>" />
+				<input id="Data" name="Data" type="text" placeholder="Data" value="<?php echo $Imponibile; ?>"/>
+				<input id="Imponibile" name="Imponibile" type="text" placeholder="Imponibile" value="<?php echo $Data; ?>"/> <br> <br>
+				<input id="Iva" name="Iva" type="text" placeholder="Iva" value="<?php echo $Iva; ?>"/>
+				<input id="Totale" name="Totale" type="text" placeholder="Totale" value="<?php echo $Totale; ?>"/>
 				<input type="submit" value="Cerca" />
 			</form>
+			<hr>
 
-			<div id="results">
+			<div id="results" class="tabella-scorrevole">
 				<?php
-				$Numero = "";
-				$Data  = "";
-				$Imponibile = "";
-				$Iva  = "";
-				$Totale = "";
-				if (count($_POST) > 0) {
-					$Numero = $_POST["Numero"];
-					$Imponibile = $_POST["Imponibile"];
-					$Data = $_POST["Data"];
-					$Iva = $_POST["Iva"];
-					$Totale = $_POST["Totale"];
-				} else if (count($_GET) > 0) {
-					$Numero = $_GET["Numero"];
-					$Imponibile = $_GET["Imponibile"];
-					$Data = $_GET["Data"];
-					$Iva = $_GET["Iva"];
-					$Totale = $_GET["Totale"];
-				}
+
 				$query = getFattura($Numero, $Imponibile, $Data, $Iva, $Totale);
 				echo "<p>getFattura: " . $query . "</p>";
 

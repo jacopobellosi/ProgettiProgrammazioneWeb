@@ -11,7 +11,6 @@
 	<meta http-equiv="Cache-control" content="no-cache">
 
 	<link rel="stylesheet" href="../css/stile.css">
-	<link rel="icon" href="../img/logo.jpeg" type="image/x-icon"  alt="Logo" />
 </head>
 
 <body>
@@ -20,6 +19,40 @@
 	include '../Extra/footer.html';
 	include '../DB/dbManager.php';
 	include '../DB/connDb.php';
+	$Codice = "";
+	$DataAp = "";
+	$Indirizzo  = "";
+	$Citta = "";
+	$CodCliente  = "";
+	$Attiva = "";
+	$DataCh  = "";
+	if (count($_POST) > 0) {
+		$Codice = $_POST["Codice"];
+		$DataAp = $_POST["DataAp"];
+		$Indirizzo  = $_POST["Indirizzo"];
+		$Citta = $_POST["Citta"];
+		$CodCliente  = $_POST["CodCliente"];
+		if (isset($_POST["Attiva"])) {
+			$Attiva = 1;
+			$DataCh  = "";
+		} else {
+			$Attiva = 0;
+			$DataCh  = $_POST["DataCh"];
+		}
+	} else if (count($_GET) > 0) {
+		$Codice = $_GET["Codice"];
+		$DataAp = $_GET["DataAp"];
+		$Indirizzo  = $_GET["Indirizzo"];
+		$Citta = $_GET["Citta"];
+		$CodCliente  = $_GET["CodCliente"];
+		if (isset($_GET["Attiva"])) {
+			$Attiva = 1;
+			$DataCh  = "";
+		} else {
+			$Attiva = 0;
+			$DataCh  = $_GET["DataCh"];
+		}
+	}
 	?>
 
 	<div class="main">
@@ -28,43 +61,30 @@
 		?>
 		<div id="content">
 			<h2>Utenze</h2>
+			<hr>
+			<h4>Filtri: </h4>
 			<form name="myform" method="POST">
-				<input id="Codice" name="Codice" type="text" placeholder="Codice" />
-				<input id="DataAp" name="DataAp" type="text" placeholder="Data Applicazione" />
-				<input id="Indirizzo" name="Indirizzo" type="text" placeholder="Indirizzo" />
-				<input id="Citta" name="Citta" type="text" placeholder="Città" />
-				<input id="CodCliente" name="CodCliente" type="text" placeholder="Codice Cliente" />
-				<input id="Attiva" name="Attiva" type="text" placeholder="Attiva (1 o 0)" />
-				<input id="DataCh" name="DataCh" type="text" placeholder="Data Chiusura (solo se non Attiva)" />
+				<input id="IdCodice" name="Codice" type="text" placeholder="Codice" value="<?php echo $Codice ?>" />
+				<label for="IdDataApRic">Data Applicazione: </label>
+				<input id="IdDataApRic" name="DataAp" type="date" value="<?php echo $DataAp ?>" />
+				<input id="IdIndirizzo" name="Indirizzo" type="text" placeholder="Indirizzo" value="<?php echo $Indirizzo ?>" /> <br> <br>
+				<input id="IdCitta" name="Citta" type="text" placeholder="Città" value="<?php echo $Citta ?>" />
+				<input id="IdCodCliente" name="CodCliente" type="text" placeholder="Codice Cliente" value="<?php echo $CodCliente ?>" />
+				<label for="IdAttiva">Attiva: </label>
+				<?php if ($Attiva == 1) { ?>
+					<input id="IdAttiva" name="Attiva" type="checkbox" checked />
+				<?php } else { ?>
+					<input id="IdAttiva" name="Attiva" type="checkbox" />
+				<?php } ?>
+				<label for="IdDataChRic">Data Chiusura: </label>
+				<input id="IdDataChRic" name="DataCh" type="date" value="<?php echo $DataCh ?>" />
 				<input type="submit" value="Cerca" />
 			</form>
+			<hr>
 
-			<div id="results">
+			<div id="results" class="tabella-scorrevole">
 				<?php
-				$Codice = "";
-				$DataAp = "";
-				$Indirizzo  = "";
-				$Citta = "";
-				$CodCliente  = "";
-				$Attiva = "";
-				$DataCh  = "";
-				if (count($_POST) > 0) {
-					$Codice = $_POST["Codice"];
-					$DataAp = $_POST["DataAp"];
-					$Indirizzo  = $_POST["Indirizzo"];
-					$Citta = $_POST["Citta"];
-					$CodCliente  = $_POST["CodCliente"];
-					$Attiva = $_POST["Attiva"];
-					$DataCh  = $_POST["DataCh"];
-				} else if (count($_GET) > 0) {
-					$Codice = $_GET["Codice"];
-					$DataAp = $_GET["DataAp"];
-					$Indirizzo  = $_GET["Indirizzo"];
-					$Citta = $_GET["Citta"];
-					$CodCliente  = $_GET["CodCliente"];
-					$Attiva = $_GET["Attiva"];
-					$DataCh  = $_GET["DataCh"];
-				}
+
 				$query = getUtenze($Codice, $DataAp, $Indirizzo, $Citta, $CodCliente, $Attiva, $DataCh);
 				echo "<p>Utenze: " . $query . "</p>";
 
@@ -127,5 +147,6 @@
 		</div>
 	</div>
 </body>
+<script type="text/javascript" src="../js/script.js" defer></script>
 
 </html>

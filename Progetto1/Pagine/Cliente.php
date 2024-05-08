@@ -20,6 +20,24 @@
 	include '../Extra/footer.html';
 	include '../DB/dbManager.php';
 	include '../DB/connDb.php';
+	$Codice = "";
+	$CF  = "";
+	$RagSoc = "";
+	$Indirizzo  = "";
+	$Citta = "";
+	if (count($_POST) > 0) {
+		$Codice = $_POST["Codice"];
+		$CF = $_POST["CF"];
+		$RagSoc = $_POST["RagSoc"];
+		$Indirizzo = $_POST["Indirizzo"];
+		$Citta = $_POST["Citta"];
+	} else if (count($_GET) > 0) {
+		$Codice = $_GET["Codice"];
+		$CF = $_GET["CF"];
+		$RagSoc = $_GET["RagSoc"];
+		$Indirizzo = $_GET["Indirizzo"];
+		$Citta = $_GET["Citta"];
+	}
 	?>
 
 	<div class="main">
@@ -28,35 +46,21 @@
 		?>
 		<div id="content">
 			<h2>Clienti</h2>
+			<hr>
+			<h4>Filtri:</h4>
 			<form name="myform" method="POST">
-				<input id="Codice" name="Codice" type="text" placeholder="Codice" />
-				<input id="CF" name="CF" type="text" placeholder="Codice Fiscale" />
-				<input id="RagSoc" name="RagSoc" type="text" placeholder="Ragione Sociale" />
-				<input id="Indirizzo" name="Indirizzo" type="text" placeholder="Indirizzo" />
-				<input id="Citta" name="Citta" type="text" placeholder="Città" />
+				<input id="Codice" name="Codice" type="text" placeholder="Codice" value="<?php echo $Codice; ?>" />
+				<input id="CF" name="CF" type="text" placeholder="Codice Fiscale" value="<?php echo $CF; ?>" />
+				<input id="RagSoc" name="RagSoc" type="text" placeholder="Ragione Sociale" value="<?php echo $RagSoc; ?>" /> <br> <br>
+				<input id="Indirizzo" name="Indirizzo" type="text" placeholder="Indirizzo" value="<?php echo $Indirizzo; ?>" />
+				<input id="Citta" name="Citta" type="text" placeholder="Città" value="<?php echo $Citta; ?>">
 				<input type="submit" value="Cerca" />
 			</form>
+			<hr>
 
-			<div id="results">
+			<div id="results" class="tabella-scorrevole">
 				<?php
-				$Codice = "";
-				$CF  = "";
-				$RagSoc = "";
-				$Indirizzo  = "";
-				$Citta = "";
-				if (count($_POST) > 0) {
-					$Codice = $_POST["Codice"];
-					$CF = $_POST["CF"];
-					$RagSoc = $_POST["RagSoc"];
-					$Indirizzo = $_POST["Indirizzo"];
-					$Citta = $_POST["Citta"];
-				} else if (count($_GET) > 0) {
-					$Codice = $_GET["Codice"];
-					$CF = $_GET["CF"];
-					$RagSoc = $_GET["RagSoc"];
-					$Indirizzo = $_GET["Indirizzo"];
-					$Citta = $_GET["Citta"];
-				}
+
 				$query = getCliente($Codice, $CF, $RagSoc, $Indirizzo, $Citta);
 				echo "<p>getCliente: " . $query . "</p>";
 

@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="it">
 
 <head>
 	<title>Modifica Utenza</title>
@@ -22,6 +22,8 @@
 		<div id="content">
 
 			<?php
+			$error = false;
+			
 			$Codice = "";
 			$DataAp = "";
 			$Indirizzo  = "";
@@ -35,24 +37,29 @@
 				$Indirizzo  = $_POST["Indirizzo"];
 				$Citta = $_POST["Citta"];
 				$CodCliente  = $_POST["CodCliente"];
-				$Attiva = $_POST["Attiva"];
-				$DataCh  = $_POST["DataCh"];
+				if(isset($_POST["Attiva"]))  {
+					$Attiva = 1;
+					$DataCh  = "NULL";
+				} else {
+					$Attiva = 0;
+					$DataCh  = $_POST["DataCh"];
+				}
+
 				if (controllo($Attiva, $DataCh)) {
 					$query = setUtenze($Codice, $DataAp, $Indirizzo, $Citta, $CodCliente, $Attiva, $DataCh);
 					try {
 						$result = $conn->query($query);
 					} catch (PDOException $e) {
-						echo "<p>DB Error on Query: " . $e->getMessage() . "</p>";
+						echo "<h3>DB Error on Query: " . $e->getMessage() . "</h3>";
 						$error = true;
 					}
+					//non stampa qui
 					if (!$error) {
-						echo $query;
-						echo ("<script>alert('Modifica andata a buon fine')</script>");
 						header('Location: ' . "Utenza.php");
+						echo ("<script>alert('Modifica andata a buon fine')</script>");
 					} else {
 						echo ("<script>alert(" . $error . ")</script>");
 					}
-				} else {
 				}
 			} else if (count($_GET) > 0) {
 				$Codice = $_GET["Codice"];
@@ -94,10 +101,12 @@
 							$Citta = $riga["Città"];
 							$CodCliente = $riga["CodCliente"];
 							if($riga["Attiva"] == 1) {
-								$checked ="checked";
+								$checked = "checked";
+								$disable = "disabled";
 							}
 							else {
 								$checked = "";
+								$disable = "";
 							}
 							$DataCh = $riga["DataCh"];
 
@@ -105,15 +114,16 @@
 
 							<tr <?php echo $classRiga; ?>>
 								<td> <input id="IdCodice" name="Codice" type="text" value=<?php echo $Codice; ?> readonly /> </td>
-								<td> <input id="IdDataAp" name="DataAp" type="date" value=<?php echo $DataAp; ?> /> </td>
+								<td> <input id="IdDataApMod" name="DataAp" type="date" value=<?php echo $DataAp; ?> /> </td>
 								<td> <input id="IdIndirizzo" name="Indirizzo" type="text" placeholder="Indirizzo" value='<?php echo $Indirizzo; ?>' /> </td>
 								<td> <input id="IdCitta" name="Citta" type="text" placeholder="Città" value='<?php echo $Citta ?>' /> </td>
 								<td> <input id="IdCodCliente" name="CodCliente" type="text" placeholder="Codice Cliente" value=<?php echo $CodCliente ?> /> </td>
 								<?php echo "<td> <input id='IdAttiva' name='Attiva' type='checkbox' ". $checked ." /> </td>" ?>
-								<td> <input id="IdDataCh" name="DataCh" type="date" placeholder="Data Chiusura (solo se non Attiva)" value='<?php echo $DataCh ?>' /> </td>
+								<?php echo "<td> <input id='IdDataChMod' name='DataCh' type='date' value='". $DataCh ."' ". $disable. " /> </td>" ?>
 							</tr>
 						<?php } ?>
 					</table>
+					<br>
 					<input type="submit" value="Applica modifiche" />
 				</form>
 			<?php }  ?>
