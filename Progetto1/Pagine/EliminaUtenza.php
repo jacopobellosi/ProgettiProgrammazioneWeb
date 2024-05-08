@@ -15,8 +15,11 @@
     $qry = "DELETE FROM Utenza WHERE ";	
     
     #potrebbe non servire if
-    if ($Codice != "")
-        $qry = $qry . "Utenza.Codice = '" . $Codice . "'";
+    if ($Codice != ""){
+        $qry = $qry . "Utenza.Codice = '" . $Codice . "';";
+        $qry = $qry ." DELETE FROM Lettura WHERE ";
+        $qry = $qry . "Lettura.CodUtenza = '" . $Codice . "';";
+    }
 
     try {   
         $result = $conn->query($qry);
@@ -35,6 +38,7 @@
 
     }
     header('Location: '."Utenza.php");
+    echo $qry;
     echo("<script>alert('Utenza'".$Codice."' eliminata correttamente)</script>");
     die();
 ?>

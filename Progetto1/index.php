@@ -16,7 +16,6 @@
 <body>
 	<?php
 	include 'Extra/header.html';
-	include 'Extra/footer.html';
 	?>
 
 	<div class="main">
@@ -54,6 +53,11 @@
 				<li>Esportazione dei dati: È possibile esportare i dati in formato CSV o PDF per un'ulteriore analisi o archiviazione.</li>
 			</ul>
 		</div>
+	</div>
+	<div>
+		<?php
+		include 'Extra/footer.html';
+		?>
 	</div>
 </body>
 

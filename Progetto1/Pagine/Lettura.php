@@ -77,7 +77,7 @@
 					<table class="table">
 						<tr class="header">
 							<th>Numero</th>
-							<th>Codice Utente</th>
+							<th>Codice Utenza</th>
 							<th>Data</th>
 							<th>Valore</th>
 							<th>Numero Fattura</th>

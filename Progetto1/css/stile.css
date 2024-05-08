@@ -1,9 +1,13 @@
 @charset "utf-8";
 
+html {
+	height: 100%;
+}
+
 body {
 	background-color: #fdd7fd;
 	height: auto;
-	width: auto;
+	width: 100%;
 	font-family: Arial, sans-serif;
 }
 
@@ -68,6 +72,11 @@ nav {
 	border-bottom-right-radius: 10px;
 }
 
+
+#content p, #content li {
+	font-size: 14px;
+}
+
 /*link e elenco puntato*/
 a {
 	color: magenta;
@@ -106,6 +115,12 @@ h2 {
 hr {
 	border-color: magenta;
 }
+
+h3 {
+	margin-top: 12px;
+	margin-bottom: 7px;
+}
+
 
 h4 {
 	margin-top: -3px;
@@ -228,6 +243,9 @@ footer {
 		width: 22%;
 	}
 
+	#content p, #content li {
+		font-size: 13px;
+	}
 
 }
 
@@ -246,6 +264,10 @@ footer {
 		font-size: 18px;
 	}
 
+	h3 {
+		font-size: 16px;
+	}
+
 	h4 {
 		font-size: 14px;
 	}
@@ -262,6 +284,10 @@ footer {
 	#content,
 	select {
 		font-size: 13px;
+	}
+
+	#content p, #content li {
+		font-size: 12px;
 	}
 
 	ol {
@@ -290,6 +316,10 @@ footer {
 
 	h2 {
 		font-size: 16px;
+	}
+
+	h3 {
+		font-size: 15px;
 	}
 
 	h4 {
@@ -321,6 +351,10 @@ footer {
 		font-size: 12px;
 	}
 
+	#content p, #content li {
+		font-size: 12px;
+	}
+
 	ol {
 		font-size: 14px;
 	}
@@ -339,6 +373,10 @@ footer {
 
 	h2 {
 		font-size: 14px;
+	}
+
+	h3{
+		font-size: 13px;
 	}
 
 	h4 {
@@ -366,6 +404,10 @@ footer {
 		font-size: 10px;
 	}
 
+	#content p, #content li {
+		font-size: 11px;
+	}
+
 	ol {
 		font-size: 12px;
 	}
@@ -390,6 +432,10 @@ footer {
 		font-size: 14px;
 	}
 
+	h3 {
+		font-size: 13px;
+	}
+
 	h4 {
 		font-size: 11px;
 	}
@@ -415,6 +461,10 @@ footer {
 		font-size: 8px;
 	}
 
+	#content p, #content li {
+		font-size: 10px;
+	}
+
 	ol {
 		font-size: 10px;
 	}
@@ -428,12 +478,13 @@ footer {
 	.main {
 		flex-direction: column;
 		height: 77%;
+		width: 96%;
 	}
 
 	nav {
 		width: 100%;
 		float: none;
-		height: 30%;
+		height: 28%;
 		border-bottom: 1px solid #ccc;
 		border-top-right-radius: 10px;
 		border-bottom-left-radius: 0px;
@@ -443,7 +494,7 @@ footer {
 		width: 95%;
 		border-top-right-radius: 0px;
 		border-bottom-left-radius: 10px;
-		height: 66.5%;
+		height: 68%;
 	}
 
 	.imgTitle {
@@ -460,6 +511,10 @@ footer {
 		font-size: 14px;
 	}
 
+	h3 {
+		font-size: 11px;
+	}
+
 	h4 {
 		font-size: 11px;
 	}
@@ -485,6 +540,9 @@ footer {
 		font-size: 8px;
 	}
 
+	#content p, #content li {
+		font-size: 9px;
+	}
 
 	ol {
 		font-size: 16px;
@@ -532,6 +590,10 @@ footer {
 		font-size: 14px;
 	}
 
+	h3 {
+		font-size: 11px;
+	}
+
 	h4 {
 		font-size: 11px;
 	}
@@ -557,6 +619,9 @@ footer {
 		font-size: 7px;
 	}
 
+	#content p, #content li {
+		font-size: 9px;
+	}
 
 	ol {
 		font-size: 16px;
