@@ -21,12 +21,12 @@
 	<div class="main">
 		<nav>
 			<ol>
-				<li><a href="Pagine/Utenza.php">Utenze</a></li>
+				<li><a href="index.php">Home</a></li>
 				<li><a href="Pagine/Cliente.php">Clienti</a></li>
+				<li><a href="Pagine/Utenza.php">Utenze</a></li>
 				<li><a href="Pagine/Lettura.php">Letture</a></li>
 				<li><a href="Pagine/Fattura.php">Fatture</a></li>
 				<li><a href="Pagine/Inserimento.php">Inserimento Utenze</a></li>
-				<li><a href="index.php">Back Home</a></li>
 			</ol>
 		</nav>
 		<div id="content">
@@ -43,14 +43,13 @@
 			<p>Il portale offre una potente funzionalità di ricerca che permette di trovare rapidamente i dati desiderati. È possibile effettuare ricerche per filtri per restringere i risultati della ricerca a un intervallo di date, a un tipo di utenza (attiva o inattiva) o ad un altro criterio specifico.</p>
 
 			<h3>Visualizzazione dei dati</h3>
-			<p>Una volta trovati i dati desiderati, il portale li visualizza in modo chiaro e organizzato. È possibile visualizzare i dettagli di ogni record, nonché esportarli in formato CSV o PDF.</p>
+			<p>Una volta trovati i dati desiderati, il portale li visualizza in modo chiaro e organizzato.</p>
 
 			<h3>Benefici</h3>
 			<p>Il portale di gestione del servizio di distribuzione acqua offre numerosi vantaggi agli utenti, tra cui:</p>
 			<ul>
 				<li>Accesso rapido e facile alle informazioni: Gli addetti possono trovare le informazioni di cui hanno bisogno in pochi clic;</li>
 				<li>Visualizzazione chiara dei dati: I dati sono visualizzati in modo chiaro e organizzato, facilitando la loro comprensione;</li>
-				<li>Esportazione dei dati: È possibile esportare i dati in formato CSV o PDF per un'ulteriore analisi o archiviazione.</li>
 			</ul>
 		</div>
 	</div>

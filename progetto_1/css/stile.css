@@ -7,7 +7,7 @@ html {
 body {
 	background-color: #fdd7fd;
 	height: auto;
-	width: 100%;
+	width: 99%;
 	font-family: Arial, sans-serif;
 }
 
@@ -81,7 +81,10 @@ nav {
 a {
 	color: magenta;
 }
+a.modal{
+	color: white;
 
+}
 ol {
 	list-style-type: none;
 	font-size: 24px;
@@ -141,7 +144,8 @@ input[type="text"] {
 	cursor: text;
 }
 
-input[type="date"] {
+input[type="date"],
+input[type="number"] {
 	width: 15%;
 }
 
@@ -151,37 +155,62 @@ select {
 	cursor: pointer;
 }
 
-input[type="submit"] {
+input[type="submit"],
+input[type="reset"] {
 	background-color: magenta;
 	border-color: magenta;
-	color: white;
+	color: black;
 	font-weight: bold;
-	text-shadow: -0.8px 0 black, 0 0.8px black, 0.8px 0 black, 0 -0.8px black;
 	background-color: transparent;
 	border-radius: 10px;
 	border: 3px solid magenta;
-	box-shadow: 0 0 3px rgba(0, 0, 0, 1);
 	box-shadow: inset 0 0 2px rgba(0, 0, 0, 1);
 	cursor: pointer;
 	transition: background-color 0.3s, border-color 0.3s;
 }
 
-input[type="submit"]:hover {
+input[type="submit"]:hover,
+input[type="reset"]:hover {
 	background-color: darkmagenta;
 	border-color: darkmagenta;
+	color: white;
+	text-shadow: -0.8px 0 black, 0 0.8px black, 0.8px 0 black, 0 -0.8px black;
 }
 
 /*tabelle*/
+td {
+	padding-left: 5px;
+}
+
+.centerTD {
+	padding-left: 0px;
+	text-align: center;
+}
+
 td input[type="text"],
-td input[type="date"] {
+td input[type="date"],
+td input[type="number"] {
 	width: auto;
 }
 
+/*.modificaImg {
+	height: 16px;
+}
+
+.modificaImg:hover {
+    filter: hue-rotate(300deg) brightness(0.8);
+}*/
+
+.centerIcon {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size:24px 
+}
 .tabella-scorrevole {
 	max-height: 59%;
 	overflow-y: auto;
 	border: 1px solid #ccc;
-
 }
 
 .table {
@@ -224,7 +253,7 @@ footer {
 
 /*responsive*/
 /*orizzontale*/
-@media only screen and (min-width: 900px) and (max-width: 1100px) {
+@media only screen and (min-width: 960px) and (max-width: 1100px) {
 	.imgTitle {
 		height: 100px;
 		position: absolute;
@@ -249,7 +278,7 @@ footer {
 
 }
 
-@media only screen and (min-width: 700px) and (max-width: 900px) {
+@media only screen and (min-width: 700px) and (max-width: 960px) {
 	.imgTitle {
 		height: 85px;
 		position: absolute;
@@ -277,7 +306,8 @@ footer {
 		height: 11px;
 	}
 
-	input[type="date"] {
+	input[type="date"],
+	input[type="number"] {
 		width: 17%;
 	}
 
@@ -331,14 +361,15 @@ footer {
 		width: 22%;
 	}
 
-	input[type="date"] {
+	input[type="date"],
+	input[type="number"] {
 		font-size: 12px;
 		width: 17%;
 	}
 
-	input[type="submit"] {
+	input[type="submit"],
+	input[type="reset"] {
 		font-size: 12px;
-		text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
 	}
 
 	input[type="checkbox"] {
@@ -384,14 +415,15 @@ footer {
 	}
 
 	input[type="text"],
-	input[type="date"] {
+	input[type="date"],
+	input[type="number"] {
 		font-size: 11px;
 		width: 19%;
 	}
 
-	input[type="submit"] {
+	input[type="submit"],
+	input[type="reset"] {
 		font-size: 11px;
-		text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
 	}
 
 	input[type="checkbox"] {
@@ -441,14 +473,15 @@ footer {
 	}
 
 	input[type="text"],
-	input[type="date"] {
+	input[type="date"],
+	input[type="number"] {
 		font-size: 9px;
 		width: 19%;
 	}
 
-	input[type="submit"] {
+	input[type="submit"],
+	input[type="reset"] {
 		font-size: 9px;
-		text-shadow: -0.5px 0 black, 0 0.5px black, 0.4px 0 black, 0 -0.5px black;
 	}
 
 	input[type="checkbox"] {
@@ -520,14 +553,15 @@ footer {
 	}
 
 	input[type="text"],
-	input[type="date"] {
+	input[type="date"],
+	input[type="number"] {
 		font-size: 9px;
 		width: 19%;
 	}
 
-	input[type="submit"] {
+	input[type="submit"],
+	input[type="reset"] {
 		font-size: 9px;
-		text-shadow: -0.5px 0 black, 0 0.5px black, 0.4px 0 black, 0 -0.5px black;
 	}
 
 	input[type="checkbox"] {
@@ -541,7 +575,11 @@ footer {
 	}
 
 	#content p, #content li {
-		font-size: 9px;
+		font-size: 9.2px;
+	}
+
+	#content li {
+		margin-left: -25px;
 	}
 
 	ol {
@@ -556,14 +594,14 @@ footer {
 @media only screen and (max-width: 400px) {
 	.main {
 		flex-direction: column;
-		height: 77%;
+		height: 79%;
 		width: 95%;
 	}
 
 	nav {
 		width: 100%;
 		float: none;
-		height: 30%;
+		height: 27%;
 		border-bottom: 1px solid #ccc;
 		border-top-right-radius: 10px;
 		border-bottom-left-radius: 0px;
@@ -573,7 +611,7 @@ footer {
 		width: 94%;
 		border-top-right-radius: 0px;
 		border-bottom-left-radius: 10px;
-		height: 66.5%;
+		height: 69%;
 	}
 
 	.imgTitle {
@@ -599,14 +637,15 @@ footer {
 	}
 
 	input[type="text"],
-	input[type="date"] {
+	input[type="date"],
+	input[type="number"] {
 		font-size: 8.5px;
 		width: 19%;
 	}
 
-	input[type="submit"] {
+	input[type="submit"],
+	input[type="reset"] {
 		font-size: 8.5px;
-		text-shadow: -0.5px 0 black, 0 0.5px black, 0.4px 0 black, 0 -0.5px black;
 	}
 
 	input[type="checkbox"] {
@@ -623,6 +662,10 @@ footer {
 		font-size: 9px;
 	}
 
+	#content li {
+		margin-left: -25px;
+	}
+
 	ol {
 		font-size: 16px;
 	}
@@ -634,4 +677,12 @@ footer {
 	.tabella-scorrevole {
 		max-height: 65%;
 	}
+}
+
+
+.modal-dimension-custom{
+	width: 40%
+}
+.w3-margin-right-custom{
+	margin-right: 10px;
 }

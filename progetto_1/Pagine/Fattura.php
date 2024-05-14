@@ -49,12 +49,13 @@
 			<hr>
 			<h4>Filtri:</h4>
 			<form name="myform" method="POST">
-				<input id="Numero" name="Numero" type="text" placeholder="Numero" value="<?php echo $Numero; ?>" />
-				<input id="Data" name="Data" type="text" placeholder="Data" value="<?php echo $Imponibile; ?>"/>
-				<input id="Imponibile" name="Imponibile" type="text" placeholder="Imponibile" value="<?php echo $Data; ?>"/> <br> <br>
-				<input id="Iva" name="Iva" type="text" placeholder="Iva" value="<?php echo $Iva; ?>"/>
-				<input id="Totale" name="Totale" type="text" placeholder="Totale" value="<?php echo $Totale; ?>"/>
+				<input id="IdCodice" name="Numero" type="number" placeholder="Numero" value="<?php echo $Numero; ?>" min="1" />
+				<input id="IdData" name="Data" type="date" placeholder="Data" value="<?php echo $Imponibile; ?>" />
+				<input id="IdImponibile" name="Imponibile" type="number" placeholder="Imponibile" value="<?php echo $Data; ?>" min="1" /> <br> <br>
+				<input id="IdIva" name="Iva" type="number" placeholder="Iva" value="<?php echo $Iva; ?>" min="1" />
+				<input id="IdTotale" name="Totale" type="number" placeholder="Totale" value="<?php echo $Totale; ?>" min="1" />
 				<input type="submit" value="Cerca" />
+				<input type="reset" value="Cancella" />
 			</form>
 			<hr>
 
@@ -76,7 +77,6 @@
 					<table class="table">
 						<tr class="header">
 							<th>Numero</th>
-							<!--th>id </th-->
 							<th>Data</th>
 							<th>Imponibile</th>
 							<th>Iva</th>
@@ -98,7 +98,7 @@
 
 						?>
 							<tr <?php echo $classRiga; ?>>
-								<td> <?php echo $Numero; ?> </td>
+								<td class="centerTD"> <?php echo $Numero; ?> </td>
 								<td> <?php echo $Data; ?> </td>
 								<td> <?php echo $Imponibile; ?> </td>
 								<td> <?php echo $Iva; ?> </td>

@@ -9,7 +9,11 @@
 	<meta name="author" content="Bellosi Jacopo, Signori Alessandro">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="Cache-control" content="no-cache">
-
+	<script src="https://kit.fontawesome.com/01ed1bbc7a.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<!--
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+	-->
 	<link rel="stylesheet" href="../css/stile.css">
 </head>
 
@@ -54,6 +58,30 @@
 		}
 	}
 	?>
+	<div id="id01" class="w3-modal">
+		<div class="w3-modal-content w3-card-4 w3-animate-zoom modal-dimension-custom">
+			<header class="w3-container w3-red">
+				<span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-red w3-xlarge w3-display-topright">&times;</span>
+				<h2>ATTENZIONE!</h2>
+			</header>
+
+			<div class="w3-bar w3-border-bottom">
+
+
+				<div class="w3-container city">
+					<p>Sei veramente sicuro di voler elimare questa utenza?</p>
+					<p>Non si torna più indietro</p>
+				</div>
+
+				<div class="w3-container w3-light-gre w3-padding">
+					<button class="w3-button w3-right w3-red w3-border  " onclick="document.getElementById('id01').style.display='none'"> <span id="utente_eliminare"></span> </button>
+					<button class="w3-button w3-right w3-white w3-border w3-margin-right-custom" onclick="document.getElementById('id01').style.display='none'">Close</button>
+				</div>
+
+			</div>
+		</div>
+
+	</div>
 
 	<div class="main">
 		<?php
@@ -64,12 +92,12 @@
 			<hr>
 			<h4>Filtri: </h4>
 			<form name="myform" method="POST">
-				<input id="IdCodice" name="Codice" type="text" placeholder="Codice" value="<?php echo $Codice ?>" />
+				<input id="IdCodice" name="Codice" type="number" placeholder="Codice" value="<?php echo $Codice ?>" min="1" />
 				<label for="IdDataApRic">Data Applicazione: </label>
 				<input id="IdDataApRic" name="DataAp" type="date" value="<?php echo $DataAp ?>" />
 				<input id="IdIndirizzo" name="Indirizzo" type="text" placeholder="Indirizzo" value="<?php echo $Indirizzo ?>" /> <br> <br>
 				<input id="IdCitta" name="Citta" type="text" placeholder="Città" value="<?php echo $Citta ?>" />
-				<input id="IdCodCliente" name="CodCliente" type="text" placeholder="Codice Cliente" value="<?php echo $CodCliente ?>" />
+				<input id="IdCodCliente" name="CodCliente" type="number" placeholder="Codice Cliente" value="<?php echo $CodCliente ?>" min="1" />
 				<label for="IdAttiva">Attiva: </label>
 				<?php if ($Attiva == 1) { ?>
 					<input id="IdAttiva" name="Attiva" type="checkbox" checked />
@@ -79,6 +107,7 @@
 				<label for="IdDataChRic">Data Chiusura: </label>
 				<input id="IdDataChRic" name="DataCh" type="date" value="<?php echo $DataCh ?>" />
 				<input type="submit" value="Cerca" />
+				<input type="reset" value="Cancella" />
 			</form>
 			<hr>
 
@@ -98,16 +127,15 @@
 				if (!$error) {
 				?>
 
-					<table class="table">
+					<table class="table" id="myTable">
 						<tr class="header">
-							<th>Codice</th>
-							<!--th>id </th-->
-							<th>Data Applicazione</th>
-							<th>Indirizzo</th>
-							<th>Città</th>
-							<th>CodCliente</th>
-							<th>Attiva</th>
-							<th>Data Chiusura </th>
+							<th onclick="sortTable(0)">Codice</th>
+							<th onclick="sortTable(1)">Data Applicazione</th>
+							<th onclick="sortTable(2)">Indirizzo</th>
+							<th onclick="sortTable(3)">Città</th>
+							<th onclick="sortTable(4)">CodCliente</th>
+							<th onclick="sortTable(5)">Attiva</th>
+							<th onclick="sortTable(6)">Data Chiusura </th>
 							<th>Modifica</th>
 							<th>Elimina</th>
 						</tr>
@@ -129,15 +157,20 @@
 
 						?>
 							<tr <?php echo $classRiga; ?>>
-								<td> <?php echo $Codice; ?> </td>
+								<td class="centerTD"> <?php echo $Codice; ?> </td>
 								<td> <?php echo $DataAp; ?> </td>
 								<td> <?php echo $Indirizzo; ?> </td>
 								<td> <?php echo $Citta ?> </td>
-								<td> <?php echo riferimentoCliente($CodCliente); ?> </td>
-								<td> <?php echo $Attiva ?> </td>
+								<td class="centerTD"> <?php echo riferimentoCliente($CodCliente); ?> </td>
+								<td class="centerTD"> <?php if ($Attiva == 1) { ?>
+										<input id="IdAttiva" name="Attiva" type="checkbox" checked disabled />
+									<?php } else { ?>
+										<input id="IdAttiva" name="Attiva" type="checkbox" disabled />
+									<?php } ?>
+								</td>
 								<td> <?php echo $DataCh ?> </td>
 								<td> <?php echo modificaUtenza($Codice); ?></td>
-								<td> <?php echo linkEliminaUtenza($Codice) ?></td>
+								<td><a onclick="document.getElementById('id01').style.display='block'; document.getElementById('utente_eliminare').innerHTML=setEliminazione(<?php echo $Codice ?>); " class='centerIcon'"><i class='far fa-trash-alt'></i> </button></a>
 							</tr>
 						<?php } ?>
 					</table>
@@ -147,6 +180,6 @@
 		</div>
 	</div>
 </body>
-<script type="text/javascript" src="../js/script.js" defer></script>
+<script type=" text/javascript" src="../js/script.js" defer></script>
 
 </html>

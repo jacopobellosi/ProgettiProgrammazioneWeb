@@ -95,6 +95,7 @@
                 <label for="IdDataCh">Data Chiusura: </label>
                 <input type="date" name="DataCh" id="IdDataCh" /> <br><br>
                 <input type="submit" value="Invia Dati" />
+                <input type="reset" value="Cancella" />
             </form>
         </div>
     </div>

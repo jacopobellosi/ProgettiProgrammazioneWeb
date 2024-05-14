@@ -50,12 +50,13 @@
 			<hr>
 			<h4>Filtri:</h4>
 			<form name="myform" method="POST">
-				<input id="Numero" name="Numero" type="text" placeholder="Numero"  value="<?php echo $Numero; ?>"/>
-				<input id="CodUtenza" name="CodUtenza" type="text" placeholder="CodUtenza"  value="<?php echo $CodUtenza; ?>"/>
-				<input id="Data" name="Data" type="text" placeholder="Data"  value="<?php echo $Data; ?>"/> <br> <br>
-				<input id="Valore" name="Valore" type="text" placeholder="Valore"  value="<?php echo $Valore; ?>"/>
-				<input id="NumFattura" name="NumFattura" type="text" placeholder="NumFattura"  value="<?php echo $NumFattura; ?>"/>
+				<input id="IdCodice" name="Numero" type="number" placeholder="Numero"  value="<?php echo $Numero; ?>" min="1" />
+				<input id="IdCodUtenza" name="CodUtenza" type="text" placeholder="CodUtenza"  value="<?php echo $CodUtenza; ?>" min="1" />
+				<input id="IdData" name="Data" type="text" placeholder="Data"  value="<?php echo $Data; ?>"/> <br> <br>
+				<input id="IdValore" name="Valore" type="number" placeholder="Valore"  value="<?php echo $Valore; ?>" min="1" />
+				<input id="IdNumFattura" name="NumFattura" type="number" placeholder="NumFattura"  value="<?php echo $NumFattura; ?>" min="1" />
 				<input type="submit" value="Cerca" />
+				<input type="reset" value="Cancella" />
 			</form>
 			<hr>
 
@@ -98,11 +99,11 @@
 
 						?>
 							<tr <?php echo $classRiga; ?>>
-								<td> <?php echo $Numero; ?> </td>
-								<td> <?php echo riferimentoUtenza($CodUtenza); ?> </td>
+								<td class="centerTD"> <?php echo $Numero; ?> </td>
+								<td class="centerTD"> <?php echo riferimentoUtenza($CodUtenza); ?> </td>
 								<td> <?php echo $Data; ?> </td>
 								<td> <?php echo $Valore; ?> </td>
-								<td> <?php echo riferimentoFattura($NumFattura); ?> </td>
+								<td class="centerTD"> <?php echo riferimentoFattura($NumFattura); ?> </td>
 							</tr>
 						<?php } ?>
 					</table>

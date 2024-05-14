@@ -49,12 +49,13 @@
 			<hr>
 			<h4>Filtri:</h4>
 			<form name="myform" method="POST">
-				<input id="Codice" name="Codice" type="text" placeholder="Codice" value="<?php echo $Codice; ?>" />
-				<input id="CF" name="CF" type="text" placeholder="Codice Fiscale" value="<?php echo $CF; ?>" />
-				<input id="RagSoc" name="RagSoc" type="text" placeholder="Ragione Sociale" value="<?php echo $RagSoc; ?>" /> <br> <br>
-				<input id="Indirizzo" name="Indirizzo" type="text" placeholder="Indirizzo" value="<?php echo $Indirizzo; ?>" />
-				<input id="Citta" name="Citta" type="text" placeholder="Città" value="<?php echo $Citta; ?>">
+				<input id="IdCodice" name="Codice" type="number" placeholder="Codice" value="<?php echo $Codice; ?>" min="1" />
+				<input id="IdCF" name="CF" type="text" placeholder="Codice Fiscale" value="<?php echo $CF; ?>" />
+				<input id="IdRagSoc" name="RagSoc" type="text" placeholder="Ragione Sociale" value="<?php echo $RagSoc; ?>" /> <br> <br>
+				<input id="IdIndirizzo" name="Indirizzo" type="text" placeholder="Indirizzo" value="<?php echo $Indirizzo; ?>" />
+				<input id="IdCitta" name="Citta" type="text" placeholder="Città" value="<?php echo $Citta; ?>">
 				<input type="submit" value="Cerca" />
+				<input type="reset" value="Cancella" />
 			</form>
 			<hr>
 
@@ -95,7 +96,7 @@
 							$Citta = $riga["Citta"];
 						?>
 							<tr <?php echo $classRiga; ?>>
-								<td> <?php echo $Codice; ?> </td>
+								<td class="centerTD"> <?php echo $Codice; ?> </td>
 								<td> <?php echo $CF; ?> </td>
 								<td> <?php echo  $RagSoc ?> </td>
 								<td> <?php echo $Indirizzo; ?> </td>

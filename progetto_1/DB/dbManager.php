@@ -10,10 +10,10 @@ function getUtenze($Codice, $DataAp, $Indirizzo, $Citta, $CodCliente, $Attiva, $
 		$qry = $qry . "AND Utenza.DataAp LIKE '%" . $DataAp . "%' ";
 
 	if ($Indirizzo != "")
-		$qry = $qry . "AND Utenza.Indirizzo = '" . $Indirizzo . "' ";
+		$qry = $qry . "AND Utenza.Indirizzo LIKE '" . $Indirizzo . "%' ";
 
 	if ($Citta != "")
-		$qry = $qry . "AND Utenza.Città = '" . $Citta . "' ";
+		$qry = $qry . "AND Utenza.Città LIKE '" . $Citta . "%' ";
 
 	if ($CodCliente != "")
 		$qry = $qry . "AND Utenza.CodCliente = '" . $CodCliente . "' ";
@@ -39,10 +39,10 @@ function getCliente($Codice, $CF, $RagSoc, $Indirizzo, $citta): string
 		$qry = $qry . "AND Cliente.RagSoc = '" . $RagSoc . "' ";
 
 	if ($Indirizzo != "")
-		$qry = $qry . "AND Cliente.Indirizzo = '" . $Indirizzo . "' ";
+		$qry = $qry . "AND Cliente.Indirizzo LIKE '" . $Indirizzo . "%' ";
 
 	if ($citta != "")
-		$qry = $qry . "AND Cliente.citta = '" . $citta . "' ";
+		$qry = $qry . "AND Cliente.citta LIKE '" . $citta . "%' ";
 
 	return $qry;
 }
@@ -113,14 +113,16 @@ function modificaUtenza($Codice): string
 {
 	if (is_null($Codice) || $Codice == "")
 		return "";
-	return "<a href='ModificaUtenza.php?Codice=" . $Codice . "'> Modifica </a>";
+	return "
+		<a href='ModificaUtenza.php?Codice=" . $Codice . "'  class='centerIcon'  >  <i class='far fa-edit '></i></a>
+		";
 }
 
 function linkEliminaUtenza($Codice)
 {
 	if (is_null($Codice) || $Codice == "")
 		return "";
-	return "<a href='EliminaUtenza.php?Codice=" . $Codice . "'> Elimina </a>";
+	return "<a href='EliminaUtenza.php?Codice=" . $Codice . "'  >Elimina</a>";
 }
 
 function setUtenze($Codice, $DataAp, $Indirizzo, $Citta, $CodCliente, $Attiva, $DataCh): string
