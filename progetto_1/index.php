@@ -26,7 +26,6 @@
 				<li><a href="Pagine/Utenza.php">Utenze</a></li>
 				<li><a href="Pagine/Lettura.php">Letture</a></li>
 				<li><a href="Pagine/Fattura.php">Fatture</a></li>
-				<li><a href="Pagine/Inserimento.php">Inserimento Utenze</a></li>
 			</ol>
 		</nav>
 		<div id="content">

@@ -15,16 +15,19 @@
 </head>
 
 <body>
+
 	<?php
 	include '../Extra/header.html';
 	include '../Extra/footer.html';
 	include '../DB/dbManager.php';
 	include '../DB/connDb.php';
+
 	$Codice = "";
 	$CF  = "";
 	$RagSoc = "";
 	$Indirizzo  = "";
 	$Citta = "";
+
 	if (count($_POST) > 0) {
 		$Codice = $_POST["Codice"];
 		$CF = $_POST["CF"];
@@ -41,29 +44,30 @@
 	?>
 
 	<div class="main">
+
 		<?php
 		include '../Extra/nav.html';
 		?>
+
 		<div id="content">
 			<h2>Clienti</h2>
 			<hr>
 			<h4>Filtri:</h4>
-			<form name="myform" method="POST">
+			<form name="myform" id="searchForm" method="POST">
 				<input id="IdCodice" name="Codice" type="number" placeholder="Codice" value="<?php echo $Codice; ?>" min="1" />
-				<input id="IdCF" name="CF" type="text" placeholder="Codice Fiscale" value="<?php echo $CF; ?>" />
-				<input id="IdRagSoc" name="RagSoc" type="text" placeholder="Ragione Sociale" value="<?php echo $RagSoc; ?>" /> <br> <br>
-				<input id="IdIndirizzo" name="Indirizzo" type="text" placeholder="Indirizzo" value="<?php echo $Indirizzo; ?>" />
-				<input id="IdCitta" name="Citta" type="text" placeholder="Città" value="<?php echo $Citta; ?>">
+				<input id="IdCF" name="CF" type="text" pattern="[\p{L} \d]+"  title="Vietato mettere apici o virgolette " placeholder="Codice Fiscale" value="<?php echo $CF; ?>" />
+				<input id="IdRagSoc" name="RagSoc" pattern="[\p{L} \d]+"  title="Vietato mettere apici o virgolette " type="text" placeholder="Ragione Sociale" value="<?php echo $RagSoc; ?>" /> <br> <br>
+				<input id="IdIndirizzo" name="Indirizzo" pattern="[\p{L} \d]+" title="Vietato mettere apici o virgolette " type="text" placeholder="Indirizzo" value="<?php echo $Indirizzo; ?>" />
+				<input id="IdCitta" name="Citta" type="text" pattern="[\p{L} \d]+" title="Vietato mettere apici o virgolette " placeholder="Città" value="<?php echo $Citta; ?>">
 				<input type="submit" value="Cerca" />
-				<input type="reset" value="Cancella" />
+				<input type="button" id="reset" value="Cancella" />
 			</form>
 			<hr>
 
 			<div id="results" class="tabella-scorrevole">
-				<?php
 
+				<?php
 				$query = getCliente($Codice, $CF, $RagSoc, $Indirizzo, $Citta);
-				echo "<p>getCliente: " . $query . "</p>";
 
 				try {
 					$result = $conn->query($query);
@@ -71,39 +75,53 @@
 					echo "<p>DB Error on Query: " . $e->getMessage() . "</p>";
 					$error = true;
 				}
+
 				if (!$error) {
 				?>
-					<table class="table">
+					<table class="table" id="myTableCliente">
 						<tr class="header">
-							<th>Codice </th>
-							<th>Codice Fiscale</th>
-							<th>Ragione Sociale</th>
-							<th>Indirizzo</th>
-							<th>Città</th>
+							<th onclick="sortTableCliente(0)"> Codice </th>
+							<th onclick="sortTableCliente(1)">Codice Fiscale</th>
+							<th onclick="sortTableCliente(2)">Ragione Sociale</th>
+							<th onclick="sortTableCliente(3)">Indirizzo</th>
+							<th onclick="sortTableCliente(4)">Città</th>
+							<th onclick="sortTableCliente(5)">Numero Utenze</th>
 						</tr>
+
 						<?php
-						$i = 0;
 						foreach ($result as $riga) {
-							$i = $i + 1;
-							$classRiga = 'class="rowOdd"';
-							if ($i % 2 == 0) {
-								$classRiga = 'class="rowEven"';
-							}
 							$Codice = $riga["Codice"];
 							$CF = $riga["CF"];
 							$RagSoc = $riga["RagSoc"];
 							$Indirizzo = $riga["Indirizzo"];
 							$Citta = $riga["Citta"];
 						?>
-							<tr <?php echo $classRiga; ?>>
+
+							<tr class="riga">
 								<td class="centerTD"> <?php echo $Codice; ?> </td>
 								<td> <?php echo $CF; ?> </td>
 								<td> <?php echo  $RagSoc ?> </td>
 								<td> <?php echo $Indirizzo; ?> </td>
 								<td> <?php echo  $Citta; ?> </td>
-							</tr>
-						<?php } ?>
+
+								<?php
+								try {
+									$result = $conn->query(numeroUtenza($Codice));
+								} catch (PDOException $e) {
+									echo "<p>DB Error on Query: " . $e->getMessage() . "</p>";
+									$error = true;
+								}
+
+								foreach ($result as $riga)
+									$NumUtenze = $riga["NumeroUtenze"];
+								?>
+
+								<td class="centerTD"> <?php echo riferimentoNumeroUtenze($NumUtenze, $Codice); ?> </td>
+
+							<?php } ?>
+
 					</table>
+
 				<?php }  ?>
 
 			</div>
@@ -111,5 +129,7 @@
 	</div>
 
 </body>
+
+<script type=" text/javascript" src="../js/script.js" defer></script>
 
 </html>
