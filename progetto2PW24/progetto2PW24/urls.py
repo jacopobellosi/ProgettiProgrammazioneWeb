@@ -16,7 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', views.home, name='home'),  # Rende questa la home page
+    # Altri percorsi per le pagine clienti, utenze, letture, fatture, ecc.
+    path('clienti/', views.clienti, name='clienti'),
+    path('utenze/', views.utenze, name='utenze'),
+    path('letture/', views.letture, name='letture'),
+    path('fatture/', views.fatture, name='fatture'),
 ]
