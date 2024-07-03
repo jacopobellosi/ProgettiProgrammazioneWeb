@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html lang="it">
+
+<head>
+    <title>Modifica Utenza</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/stile.css' %}">
+    <script type="text/javascript" src="{% static 'js/script.js' %}" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+    <link rel="icon" href="{% static 'img/logo.jpeg' %}" type="image/x-icon" alt="Logo" />
+</head>
+
+<body>
+
+    {% include 'Extra/header.html' %}
+    {% include 'Extra/footer.html' %}
+
+    <div class="main">
+
+        {% include 'Extra/nav.html' %}
+
+        <div id="content">
+
+            <h2>{% if Codice %}Modifica l'utenza{% else %}Aggiungi una utenza{% endif %}</h2>
+            <hr>
+            <br>
+            <form name="myform" method="POST" onsubmit="return controllo(document.getElementById('CodCliente').value,'{{id_cliente}}',document.getElementById('IdDataApMod').value,document.getElementById('IdDataChMod').value,document.getElementById('IdAttiva').checked)" >
+                {% csrf_token %}
+                <table class="smalltable">
+                    <tr class="header">
+                        <th>Codice</th>
+                        <th>Data Applicazione</th>
+                        <th>Indirizzo</th>
+                        <th>Città</th>
+                        <th>Codice Cliente</th>
+                        <th>Attiva</th>
+                        <th>Data Chiusura </th>
+                    </tr>
+                    <tr class="riga">
+                        {% if Codice %}
+                                <td> <input id='IdCodice' name='Codice' type='number' value='{{ result.Codice|default_if_none:"" }}' readonly /> </td>
+                                <td> <input  name="DataAp" id="IdDataApMod" type="date" value='{{ result.DataAp|default_if_none:"" }}' required /> </td>
+                                <td> <input id="IdIndirizzo" name="Indirizzo" type="text" pattern="[\p{L} \d]+" placeholder="Indirizzo" value='{{ result.Indirizzo|default_if_none:"" }}' required /> </td>
+                                <td> <input id="IdCitta" name="Citta" type="text" pattern="[\p{L} \d]+" placeholder="Città" value='{{ result.Città|default_if_none:"" }}' required /> </td>
+                                <td>
+                                    <input type="number" name="CodCliente" id="CodCliente" list="IdCodCliente" placeholder="Codice Cliente" value='{{ result.CodCliente|default_if_none:"" }}' min="1" required />
+                                    <datalist id="IdCodCliente">
+                                        {% for cliente in id_cliente %}
+                                            <option value="{{ cliente }}">{{ cliente }}</option>
+        
+                                        {% endfor %}
+                                    </datalist>
+                                </td>
+                                <td> <input id='IdAttiva' name='Attiva' type='checkbox' {% if result.Attiva %}checked{% endif %} /> </td>
+                                <td> <input  name='DataCh' id="IdDataChMod" type='date' value='{{ result.DataCh|default_if_none:"" }}' {% if result.Attiva %}disabled{% endif %}  /> </td>
+                            
+                        {% else %}
+                            <td> <input id='IdCodice' name='Codice' type='number' value='' readonly /> </td>
+                            <td> <input id="IdDataApMod" name="DataAp" type="date" value='' required /> </td>
+                            <td> <input id="IdIndirizzo" name="Indirizzo" type="text" pattern="[\p{L} \d]+" placeholder="Indirizzo" value='' required /> </td>
+                            <td> <input id="IdCitta" name="Citta" type="text" pattern="[\p{L} \d]+" placeholder="Città" value='' required /> </td>
+                            <td>
+                                <input type="number" name="CodCliente" id="CodCliente" list="IdCodCliente" placeholder="Codice Cliente" value='' min="1" required />
+                                <datalist id="IdCodCliente">
+                                    {% for cliente in id_cliente %}
+                                        <option value="{{ cliente }}">{{ cliente }}</option>
+
+                                    {% endfor %}
+                                </datalist>
+                            </td>
+                            <td> <input id='IdAttiva' name='Attiva' type='checkbox'  onchange="console.log(Attiva.checked);"/> </td>
+                            <td> <input id='IdDataChMod' name='DataCh' type='date' value=''      /> </td> 
+                        {% endif %}
+                    </tr>
+                </table>
+                <br>
+                <input type="submit" value="{% if Codice %}Applica modifiche{% else %}Inserisci utente{% endif %}" />
+            </form>
+
+        </div>
+    </div>
+</body>
+
+<script type="text/javascript" src="{% static 'js/script.js' %}" defer></script>
+
+</html>

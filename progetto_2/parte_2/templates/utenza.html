@@ -1,0 +1,113 @@
+<!DOCTYPE HTML>
+<html lang="it">
+
+<head>
+    <title>Gestore Acque</title>
+
+    <meta charset="UTF-8">
+    <meta name="description" content="Gestore database per Distribuzioni Acque">
+    <meta name="author" content="Bellosi Jacopo, Signori Alessandro">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-control" content="no-cache">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/stile.css' %}">
+    <script type="text/javascript" src="{% static 'js/script.js' %}" defer></script>
+</head>
+
+<body>
+    
+    {% include 'Extra/header.html' %}
+
+    <div id="Err" class="sfondoErr">
+        <div class="errore">
+            <h2><u>ATTENZIONE!</u></h2>
+            <p>Sei veramente sicuro di voler elimare questa utenza?</p>
+            <p>Non si torna più indietro.</p>
+            <div class="pulsanti">
+                <input type="button" id="elimPuls" value="Elimina" class="elimina" />
+                <input type="button" value="Annulla" onclick="document.getElementById('Err').style.display='none'" />
+            </div>
+        </div>
+    </div>
+
+    <div class="main">
+        {% include 'Extra/nav.html' %}
+        <div id="content">
+            <div class="divTitolo">
+                <h2>Utenze</h2>
+                <a href="{% url 'aggiungi_utenza' %}">
+                    <img src="{% static 'images/Aggiungi.png' %}" class="iconaPiu">
+                </a>
+            </div>
+            <hr>
+
+            <h4>Filtri: </h4>
+            <form name="myform" id="searchForm" method="POST" action="{% url 'utenza' %}">
+                {% csrf_token %}
+                <input id="IdCodice" name="Codice" type="number" placeholder="Codice" value="{{ Codice }}" min="1" />
+                <label for="IdDataApRic">Data Applicazione: </label>
+                <input id="IdDataApRic" name="DataAp" type="date" value="{{ DataAp }}" />
+                <input id="IdIndirizzo" name="Indirizzo" pattern="[\p{L} \d]+" title="Vietato mettere apici o virgolette " type="text" placeholder="Indirizzo" value="{{ Indirizzo }}" /> <br> <br>
+                <input id="IdCitta" name="Citta" type="text" pattern="[\p{L} \d]+" title="Vietato mettere apici o virgolette " placeholder="Città" value="{{ Citta }}" />
+                <input id="IdCodCliente" name="CodCliente" type="number" placeholder="Codice Cliente" value="{{ CodCliente }}" min="1" />
+                <label for="IdAttiva">Attiva: </label>
+                <input id="IdAttiva" name="Attiva" type="checkbox" {% if Attiva %}checked{% endif %} />
+                <label for="IdDataChRic">Data Chiusura: </label>
+                <input id="IdDataChRic" name="DataCh" type="date" value="{{ DataCh }}" />
+                <input type="submit" value="Cerca" />
+                <input type="button" id="reset" value="Cancella" />
+            </form>
+            <hr>
+
+            <div id="results" class="tabella-scorrevole">
+                {% if error %}
+                <p>DB Error on Query: {{ error }}</p>
+                {% else %}
+                <table class="table" id="myTableUtenza">
+                    <tr class="header">
+                        <th onclick="sortTableUtenza(0)">Codice</th>
+                        <th onclick="sortTableUtenza(1)">Data Applicazione</th>
+                        <th onclick="sortTableUtenza(2)">Indirizzo</th>
+                        <th onclick="sortTableUtenza(3)">Città</th>
+                        <th onclick="sortTableUtenza(4)">Cliente</th>
+                        <th onclick="sortTableUtenza(5)">Attiva</th>
+                        <th onclick="sortTableUtenza(6)">Data Chiusura</th>
+                        <th onclick="sortTableUtenza(7)">Numero Letture</th>
+                        <th>Modifica</th>
+                        <th>Elimina</th>
+                    </tr>
+                    
+                    {% for riga in result %}
+                    <tr class="riga">
+                        {% if riga.Codice %}
+                        <td class="centerTD">{{ riga.Codice }}</td>
+                        <td>{{ riga.DataAp }}</td>
+                        <td>{{ riga.Indirizzo }}</td>
+                        <td>{{ riga.Città }}</td>
+                        <td class="centerTD"><a href="{% url 'cliente' %}?RagSoc={{ riga.RagSoc }}">{{ riga.RagSoc }} - Cod:{{ riga.CodCliente }}</a> </td>
+                        <td class="centerTD">
+                            <input id="IdAttiva" name="Attiva" type="checkbox" {% if riga.Attiva == 1 %}checked{% endif %} disabled />
+                        </td>
+                        {% if riga.DataCh == None %}
+                        <td></td>
+                        {% else %}
+                        <td>{{ riga.DataCh }}</td>
+                        {% endif %}
+                        <td class="centerTD"><a href="{% url 'lettura' %}?CodUtenza={{ riga.Codice }}">{{ riga.Numero_letture }}</a></td>
+                        <td class="centerTDicona"><a href="{% url 'modifica_utenza'  riga.Codice %}"><img src="{% static 'images/Modifica.png' %}" class="icona"></a></td>
+                        <td class="centerTDicona"><a onclick="setEliminazione('{{riga.Codice}}')" class='centerIcon'><img src="{% static 'images/Elimina.png' %}" alt="Cestino Elimina" class="icona"></a></td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </table>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    {% include 'Extra/footer.html' %}
+
+   
+</body>
+
+</html>

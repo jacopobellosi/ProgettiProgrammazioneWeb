@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html lang="it">
+<head>
+    <title>Lettura</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/stile.css' %}">
+    <link rel="icon" href="{% static 'img/logo.jpeg' %}" type="image/x-icon" alt="Logo" />
+</head>
+<body>
+
+    {% include 'Extra/header.html' %}
+    {% include 'Extra/footer.html' %}
+
+    <div class="main">
+
+        {% include 'Extra/nav.html' %}
+
+        <div id="content">
+            <h2>Letture</h2>
+            <hr>
+            <h4>Filtri:</h4>
+            <form id="searchForm" name="myform" method="POST" action="{% url 'lettura' %}">
+                {% csrf_token %}
+                <input id="IdCodice" name="Numero" type="number" placeholder="Numero" value="{{ Numero }}" min="1" />
+                <input id="IdCodUtenza" name="CodUtenza" type="number" placeholder="CodUtenza" value="{{ CodUtenza }}" min="1" />
+                <label for="IdData">Data Lettura: </label>
+                <input id="IdData" name="Data" type="date" placeholder="Data" value="{{ Data }}" /> <br> <br>
+                <input id="IdValore" name="Valore" type="number" placeholder="Valore" value="{{ Valore }}" min="1" />
+                <input id="IdNumFattura" name="NumFattura" type="number" placeholder="NumFattura" value="{{ NumFattura }}" min="1" />
+                <input type="submit" value="Cerca" />
+                <input type="button" id="reset" value="Cancella" onclick="document.getElementById('searchForm').reset();" />
+            </form>
+            <hr>
+
+            <div id="results" class="tabella-scorrevole">
+                {% if error %}
+                    <p style="color:red;">{{ error }}</p>
+                {% else %}
+                    <table class="table" id="myTableLettura">
+                        <tr class="header">
+                            <th onclick="sortTableLettura(0)">Numero</th>
+                            <th onclick="sortTableLettura(1)">Codice Utenza</th>
+                            <th onclick="sortTableLettura(2)">Data Lettura</th>
+                            <th onclick="sortTableLettura(3)">Valore</th>
+                            <th onclick="sortTableLettura(4)">Numero Fattura</th>
+                        </tr>
+                        {% for r in results %}
+                            <tr class="riga">
+                                <td class="centerTD"> {{ r.Numero }} </td>
+                                <script>
+                                    console.log("{{r.CodUtenza}}")
+                                </script>
+                                <td class="centerTD"><a href="{% url 'utenza' %}?Codice={{ r.CodUtenza }}" >{{ r.CodUtenza }} </a></td>
+                                <td> {{ r.Data }} </td>
+                                <td> {{ r.Valore }} </td>
+                                {% if r.NumFattura %}
+                                    <td class="centerTD"><a href="{% url 'fattura' %}?Numero={{ r.NumFattura }}" > {{ r.NumFattura }} </a></td>
+                                {% else %}
+                                    <td class="centerTD"> </td>
+                                {% endif %}
+                                
+                            </tr>
+                        {% endfor %}
+                    </table>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+</body>
+<script type="text/javascript" src="{% static 'js/script.js' %}" defer></script>
+</html>
