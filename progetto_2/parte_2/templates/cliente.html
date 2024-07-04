@@ -54,7 +54,7 @@
                                 <td>{{ riga.RagSoc }}</td>
                                 <td>{{ riga.Indirizzo }}</td>
                                 <td>{{ riga.Citta }}</td>
-                                <td class="centerTD"><a href="{% url 'utenza' %}?Codice={{ riga.Codice }}">{{ riga.NumeroUtenze }}</a></td>
+                                <td class="centerTD"><a href="{% url 'utenza' %}?CodCliente={{ riga.Codice }}">{{ riga.NumeroUtenze }}</a></td>
                             </tr>
                         {% endfor %}
                     </table>

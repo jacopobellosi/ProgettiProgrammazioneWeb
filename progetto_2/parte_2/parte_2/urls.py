@@ -37,12 +37,12 @@ urlpatterns = [
     path('fattura/', views.fatture, name='fattura'),
 
     # Visualizzazione utenza specifica
-    path('utenza/<int:cod_utenza>/', views.utenza_detail, name='utenza_detail'),
+
 
     # Modifica, aggiungi e elimina utenza
     path('modifica_utenza/<int:codice>/', views.modifica_utenza, name='modifica_utenza'),
     path('aggiungi_utenza/', views.aggiungi_utenza, name='aggiungi_utenza'),
-    path('elimina_utenza/<int:codice>/', views.elimina_utenza, name='elimina_utenza'),
+    path('utenza/elimina_utenza/<int:codice>/', views.elimina_utenza, name='elimina_utenza'),
 
 
     # Visualizzazione lettura

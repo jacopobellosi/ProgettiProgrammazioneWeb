@@ -47,8 +47,8 @@
                                 <td>
                                     <input type="number" name="CodCliente" id="CodCliente" list="IdCodCliente" placeholder="Codice Cliente" value='{{ result.CodCliente|default_if_none:"" }}' min="1" required />
                                     <datalist id="IdCodCliente">
-                                        {% for cliente in id_cliente %}
-                                            <option value="{{ cliente }}">{{ cliente }}</option>
+                                        {% for cliente in Clienti %}
+                                            <option value="{{ cliente.Codice }}">{{cliente.RagSoc}}</option>
         
                                         {% endfor %}
                                     </datalist>
@@ -64,10 +64,10 @@
                             <td>
                                 <input type="number" name="CodCliente" id="CodCliente" list="IdCodCliente" placeholder="Codice Cliente" value='' min="1" required />
                                 <datalist id="IdCodCliente">
-                                    {% for cliente in id_cliente %}
-                                        <option value="{{ cliente }}">{{ cliente }}</option>
-
-                                    {% endfor %}
+                                    {% for cliente in Clienti %}
+                                            <option value="{{ cliente.Codice }}">{{cliente.RagSoc}}</option>
+        
+                                        {% endfor %}
                                 </datalist>
                             </td>
                             <td> <input id='IdAttiva' name='Attiva' type='checkbox'  onchange="console.log(Attiva.checked);"/> </td>

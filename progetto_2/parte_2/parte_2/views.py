@@ -29,7 +29,7 @@ def utenza_view(request):
     DataAp = request.POST.get("DataAp", "") if request.method == 'POST' else request.GET.get("DataAp", "")
     Indirizzo = request.POST.get("Indirizzo", "")
     Citta = request.POST.get("Citta", "")
-    CodCliente = request.POST.get("CodCliente", "") 
+    CodCliente = request.POST.get("CodCliente", "") if request.method == 'POST' else request.GET.get("CodCliente", "")
     Attiva = 1 if request.POST.get("Attiva") else None
     DataCh = request.POST.get("DataCh", "")
 
@@ -71,8 +71,8 @@ def utenza_view(request):
         params.append(DataCh)
 
     query += " ORDER BY Codice"
-    print("prova")
-    print("query", query, params)
+    #print("prova")
+    #print("query nella visualizzazione ", query," ", params)
 
     try:
         with connection.cursor() as cursor:
@@ -81,15 +81,19 @@ def utenza_view(request):
             results = [dict(zip(columns, row)) for row in cursor.fetchall()]
     except Exception as e:
         error = str(e)
+        print("Errore 0", error)
 
     for result in results:
         query = "SELECT COUNT(*) as Numero FROM lettura WHERE CodUtenza = %s"
+        params = [result['Codice']]
         try:
             with connection.cursor() as cursor:
                 cursor.execute(query, [result['Codice']])
                 result['Numero_letture'] = cursor.fetchone()[0]
+                #print("Query letture ", query, " ", params)
         except Exception as e:
             error = str(e)
+            print("Errore 1", error)\
 
         result['DataAp'] = result['DataAp'].strftime('%Y-%m-%d')
         if result['DataCh']:
@@ -102,10 +106,12 @@ def utenza_view(request):
             with connection.cursor() as cursor:
                 cursor.execute(query, [result['CodCliente']])
                 result['RagSoc'] = cursor.fetchone()[0]
+                #print("query cliente ", query, " ", params)
         except Exception as e:
             error = str(e)
+            print("Errore 3", error)
 
-    print(result)
+    #print(results)
     context = {
         'Codice': Codice,
         'DataAp': DataAp,
@@ -119,27 +125,6 @@ def utenza_view(request):
     }
     return render(request, 'utenza.html', context)
 
-def utenza_detail(request, cod_utenza):
-    #utenza = get_object_or_404(Utenza, Codice=cod_utenza)
-    print("test")
-
-    return render(request, 'utenza.html', {'Codice': cod_utenza})
-
-def mostra_utenza(request, codice):
-    query = "SELECT * FROM utenza WHERE Codice = %s"
-    try:
-        with connection.cursor() as cursor:
-            cursor.execute(query, [codice])
-            columns = [col[0] for col in cursor.description]
-            results = [dict(zip(columns, row)) for row in cursor.fetchall()]
-    except Exception as e:
-        error = str(e)
-
-    context = {
-        'Codice': codice,
-        'result': results[0],
-        'error': error,
-    }
 
     return render(request, 'utenza.html', context)
 
@@ -154,6 +139,7 @@ def modifica_utenza(request, codice):
         indirizzo = request.POST.get('Indirizzo', '')
         citta = request.POST.get('Citta', '')
         cod_cliente = request.POST.get('CodCliente', '')
+        print("Codice cliente ", cod_cliente)
         attiva = 'Attiva' in request.POST
         data_ch = request.POST.get('DataCh', '') if not attiva else None
 
@@ -165,7 +151,7 @@ def modifica_utenza(request, codice):
             data_ap_dt = None
             data_ch_dt = None
 
-        is_valid = controllo(attiva, data_ch_dt, data_ap_dt)
+        is_valid = controllo(attiva, data_ch_dt, data_ap_dt,cod_cliente)
 
         if is_valid:
             query = """
@@ -199,9 +185,24 @@ def modifica_utenza(request, codice):
             with connection.cursor() as cursor:
                 cursor.execute(query)
                 clienti_codici = [row[0] for row in cursor.fetchall()]
+                columns = [col[0] for col in cursor.description]
         except Exception as e:
             error = str(e)
+            print("Errore "+error)
 
+        try:
+            with connection.cursor() as cursor:
+                cursor.execute(query)
+                columns = [col[0] for col in cursor.description]
+                clienti = [dict(zip(columns, row)) for row in cursor.fetchall()]
+        except Exception as e:
+            error = str(e)
+            print("Errore "+error)
+
+
+        print("clienti_codici", clienti_codici)
+        print("clienti", clienti)
+        
         result = results[0] if results else {}
         result['DataAp'] = result['DataAp'].strftime('%Y-%m-%d')
         if result.get('DataCh'):
@@ -216,11 +217,11 @@ def modifica_utenza(request, codice):
             'Attiva': result.get('Attiva'),
             'DataCh': result.get('DataCh'),
             'DataAp': result.get('DataAp'),
-            'Clienti': clienti_codici,
+            'Clienti': clienti,
             'id_cliente': clienti_codici,
             'error': error,
         }
-    print(result)
+        print(result)
     return render(request, 'modifica_utenza.html', context)
 
 
@@ -247,7 +248,7 @@ def aggiungi_utenza(request):
             data_ap_dt = None
             data_ch_dt = None
 
-        is_valid = controllo(attiva, data_ch_dt, data_ap_dt)
+        is_valid = controllo(attiva, data_ch_dt, data_ap_dt,False)
 
         if is_valid:
             query = """
@@ -270,25 +271,42 @@ def aggiungi_utenza(request):
             #return("modifica_utenza")
             #return render(request, 'modifica_utenza.html', context)
     else:
+        clienti_codici = []
         query = "SELECT Codice, RagSoc FROM cliente"
         try:
             with connection.cursor() as cursor:
                 cursor.execute(query)
                 clienti_codici = [row[0] for row in cursor.fetchall()]
+                columns = [col[0] for col in cursor.description]
         except Exception as e:
             error = str(e)
+            print("Errore "+error)
+
+        try:
+            with connection.cursor() as cursor:
+                cursor.execute(query)
+                columns = [col[0] for col in cursor.description]
+                clienti = [dict(zip(columns, row)) for row in cursor.fetchall()]
+        except Exception as e:
+            error = str(e)
+            print("Errore "+error)
+
+
+        print("clienti_codici", clienti_codici)
+        print("clienti", clienti)
 
     context = {
         'utenza': None,
         'clienti': Cliente.objects.all(),
         'error': error,
+        'Clienti': clienti,
         'id_cliente': clienti_codici,
     }
 
     return render(request, 'modifica_utenza.html', context)
 
 # Controllo dati utenza
-def controllo(attiva, data_ch, data_ap):
+def controllo(attiva, data_ch, data_ap,codice):
     if attiva and data_ch:
         print("c'è la data ma è attivo")
         return False
@@ -298,6 +316,30 @@ def controllo(attiva, data_ch, data_ap):
     if data_ap and data_ch and data_ap > data_ch:
         print("La data di chiusura è antecedente a quella d'inserimento")
         return False
+    clienti_codici = []
+    controllo=True
+    if codice:
+        controllo=False
+        query = "SELECT Codice FROM cliente"
+        try:
+            with connection.cursor() as cursor:
+                cursor.execute(query)
+                columns = [row[0] for row in cursor.fetchall()]
+                print("columns ",columns)
+                for c in columns:
+                    print("c ",c,"codice ",codice)
+                    if(int(codice) == int(c)):
+                        print("codice esistente")
+                        controllo = True;
+                        break
+        except Exception as e:
+            error = str(e)
+            print("Errore "+error)
+
+
+    if controllo==False:
+            print("CODICE CLIENTE NON ESISTE! ")
+            return False
     return True
 
 # View per eliminare un'utenza
@@ -412,7 +454,7 @@ def clienti(request):
         'error': error,
     }
     print(query)
-    print(results)
+    #print(results)
     return render(request, 'cliente.html', context)
 
 def getCliente(Codice, CF, RagSoc, Indirizzo, Citta):
@@ -464,6 +506,7 @@ def fatture(request):
         except Exception as e:
             error = str(e)
 
+        result['Data'] = result['Data'].strftime('%Y-%m-%d')
     context = {
         'Numero': Numero,
         'Data': Data,

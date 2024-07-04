@@ -398,10 +398,10 @@ function controllo(cliente,codice_clienti,data_ap,data_ch,attiva){
   //alert("Ora controllo le date "+attiva+" "+" "+data_apertura+" "+data_chiusura)
   if(attiva==0){
     if(data_apertura<=data_chiusura){
-      alert("Date perfette "+data_apertura+" "+data_chiusura)
+      //alert("Date perfette "+data_apertura+" "+data_chiusura)
       return true;
     }else{
-      alert("Data di apertura maggiore di quella di chiusura");
+      alert("Data di applicazione maggiore di quella di chiusura");
       return false;
     }
   }else{
