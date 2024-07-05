@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
 <html lang="it">
+
 <head>
     <title>Fattura</title>
     <meta charset="UTF-8">
@@ -8,59 +9,82 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Cache-control" content="no-cache">
     {% load static %}
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'css/stile.css' %}">
     <link rel="stylesheet" href="{% static 'css/stile_custom.css' %}">
 
     <link rel="icon" href="{% static 'img/logo.jpeg' %}" type="image/x-icon" alt="Logo" />
 </head>
+
 <body>
     {% include 'Extra/header.html' %}
-   
 
-    <div class="main">
-        {% include 'Extra/nav.html' %}
-        <div id="content">
-            <h2>Fatture</h2>
-            <hr>
-            <h4>Filtri:</h4>
-            <form name="myform" id="searchForm" method="POST" action="{% url 'fattura' %}">
-                {% csrf_token %}
-                <input id="IdNumero" name="Numero" type="number" placeholder="Numero" value="{{ Numero }}" min="1" />
-                <input id="IdData" name="Data" type="date" placeholder="Data" value="{{ Data }}" />
-                <input id="IdImponibile" name="Imponibile" type="number" placeholder="Imponibile" value="{{ Imponibile }}" min="1" /> <br> <br>
-                <input id="IdIva" name="Iva" type="number" placeholder="Iva" value="{{ Iva }}" min="1" />
-                <input id="IdTotale" name="Totale" type="number" placeholder="Totale" value="{{ Totale }}" min="1" />
-                <input type="submit" value="Cerca" />
-                <input type="button" id="reset" value="Cancella" />
-            </form>
-            <hr>
+    <div class="container-fluid">
 
-            <div id="results" class="tabella-scorrevole">
-                {% if error %}
-                    <p>DB Error on Query: {{ error }}</p>
-                {% else %}
-                    <table class="table" id="myTableFattura">
-                        <tr class="header">
-                            <th onclick="sortTableFattura(0)">Numero</th>
-                            <th onclick="sortTableFattura(1)">Data</th>
-                            <th onclick="sortTableFattura(2)">Imponibile</th>
-                            <th onclick="sortTableFattura(3)">Iva</th>
-                            <th onclick="sortTableFattura(4)">Totale</th>
-                            <th onclick="sortTableFattura(5)">Numero Letture</th>
-                        </tr>
-                        {% for riga in results %}
+        <div class="main">
+            <div class="row flex-grow-1">
+                {% include 'Extra/nav.html' %}
+                <div id="content" class="col-lg-10 col-md-10 col-sm-12">
+                    <h2>Fatture</h2>
+                    <hr>
+                    <h4>Filtri:</h4>
+                    <form name="myform" id="searchForm" method="POST" action="{% url 'fattura' %}" class="row g-3">
+                        {% csrf_token %}
+                        <div class="col-md-3">
+                            <input id="IdNumero" name="Numero" type="number" class="form-control" placeholder="Numero" value="{{ Numero }}"
+                                min="1" />
+                        </div>
+                        <div class="col-md-3">
+                            <input id="IdData" name="Data" type="date" class="form-control" placeholder="Data" value="{{ Data }}" />
+                        </div>
+                        <div class="col-md-3">
+                            <input id="IdImponibile" name="Imponibile" type="number" class="form-control" placeholder="Imponibile"
+                                value="{{ Imponibile }}" min="1" />
+                        </div>
+                        <div class="w-100 custom-row-break"></div>
+                        <div class="col-md-3">
+                            <input id="IdIva" name="Iva" type="number" class="form-control" placeholder="Iva" value="{{ Iva }}" min="1" />
+                        </div>
+                        <div class="col-md-3">
+                            <input id="IdTotale" name="Totale" type="number" class="form-control" placeholder="Totale" value="{{ Totale }}"
+                                min="1" />
+                        </div>
+                        <div class="col-md-3">
+                            <input type="submit" class="btn btn-primary" value="Cerca" />
+                            <input type="button" class="btn btn-secondary" id="reset" value="Cancella" />
+                        </div>
+                    </form>
+                    <hr>
+
+                    <div id="results" class="tabella-scorrevole">
+                        {% if error %}
+                        <p>DB Error on Query: {{ error }}</p>
+                        {% else %}
+                        <table class="table" id="myTableFattura">
+                            <tr class="header">
+                                <th onclick="sortTableFattura(0)">Numero</th>
+                                <th onclick="sortTableFattura(1)">Data</th>
+                                <th onclick="sortTableFattura(2)">Imponibile</th>
+                                <th onclick="sortTableFattura(3)">Iva</th>
+                                <th onclick="sortTableFattura(4)">Totale</th>
+                                <th onclick="sortTableFattura(5)">Numero Letture</th>
+                            </tr>
+                            {% for riga in results %}
                             <tr class="riga">
                                 <td class="centerTD">{{ riga.Numero }}</td>
                                 <td>{{ riga.Data }}</td>
                                 <td>{{ riga.Imponibile }}</td>
                                 <td>{{ riga.Iva }}</td>
                                 <td>{{ riga.Totale }}</td>
-                                <td class="centerTD"><a href="{% url 'lettura' %}?NumFattura={{ riga.Numero }}" >{{ riga.NumeroLetture }}</a></td>
+                                <td class="centerTD"><a href="{% url 'lettura' %}?NumFattura={{ riga.Numero }}">{{
+                                        riga.NumeroLetture }}</a></td>
                             </tr>
-                        {% endfor %}
-                    </table>
-                {% endif %}
+                            {% endfor %}
+                        </table>
+                        {% endif %}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -68,4 +92,5 @@
     {% include 'Extra/footer.html' %}
 </body>
 <script type="text/javascript" src="{% static 'js/script.js' %}" defer></script>
+
 </html>

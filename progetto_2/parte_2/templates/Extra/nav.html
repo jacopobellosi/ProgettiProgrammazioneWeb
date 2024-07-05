@@ -1,9 +1,19 @@
-<nav>
-    <ol>
-        <li><a href="{% url 'home' %}">Home</a></li>
-        <li><a href="{% url 'cliente' %}">Clienti</a></li>
-        <li><a href="{% url 'utenza' %}">Utenze</a></li>
-        <li><a href="{% url 'lettura' %}">Letture</a></li>
-        <li><a href="{% url 'fattura' %}">Fatture</a></li>
-    </ol>
+<nav class="navbar navbar-expand-lg col-lg-2 col-md-2 col-sm-12">
+    <ul class="navbar-nav flex-column">
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'home' %}">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'cliente' %}">Clienti</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'utenza' %}">Utenze</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'lettura' %}">Letture</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'fattura' %}">Fatture</a>
+        </li>
+    </ul>
 </nav>

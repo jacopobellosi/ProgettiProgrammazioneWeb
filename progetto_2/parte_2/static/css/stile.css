@@ -1,6 +1,6 @@
 @charset "utf-8";
 
-html {
+/*html {
 	height: 100%;
 }
 
@@ -9,7 +9,7 @@ body {
 	height: auto;
 	width: 99%;
 	font-family: Arial, sans-serif;
-}
+}*/
 
 /*Cancellazione*/
 .sfondoErr {
@@ -191,15 +191,15 @@ a:hover {
 */
 
 /*titoli contenuto*/
-.divTitolo {
+/*.divTitolo {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-}
+}*/
 
-h2 {
+/*h2 {
 	text-decoration: underline;
-}
+}*/
 
 .iconaPiu {
 	width: 2.5%;
@@ -211,25 +211,25 @@ h2 {
 	filter: hue-rotate(352deg) brightness(0.8);
 }
 
-hr {
+/*hr {
 	border-color: magenta;
 }
-
+*/
 h3 {
 	margin-top: 12px;
 	margin-bottom: 7px;
 }
 
-h4 {
+/*h4 {
 	margin-top: -3px;
 	margin-bottom: 10px;
-}
+}*/
 
 .msg {
 	text-align: center;
 }
 
-/*input*/
+/*input
 input[type="text"] {
 	font-size: 13px;
 	width: 19%;
@@ -267,7 +267,7 @@ input[type="button"]:hover {
 	border-color: darkmagenta;
 	color: white;
 	text-shadow: -0.8px 0 black, 0 0.8px black, 0.8px 0 black, 0 -0.8px black;
-}
+}*/
 
 /*tabelle*/
 td {
