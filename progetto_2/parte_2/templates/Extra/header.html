@@ -1,8 +1,13 @@
-<header>
-	<div class="divTitle">
-		{% load static %}
-		<img class="imgTitle" src="{% static 'images/logo.jpeg' %}" alt="Logo" >
-		<h1 class="title" id="h1Title">Gestore Acque</h1>
-	</div>
-
+<header class="py-3">
+    <div class="container-fluid">
+        {% load static %}
+        <div class="row align-items-center">
+            <div class="col-sm-4 d-flex justify-content-center justify-content-sm-start">
+                <img src="{% static 'images/logo.jpeg' %}" alt="Logo" class="img-fluid" style="max-width: 80%; height: auto;">
+            </div>
+            <div class="col-sm-8">
+                <h1 class="display-2 text-center text-sm-start" id="h1Title">Gestore Acque</h1>
+            </div>
+        </div>
+    </div>
 </header>

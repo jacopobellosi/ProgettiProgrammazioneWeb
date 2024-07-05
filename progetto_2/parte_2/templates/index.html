@@ -11,51 +11,87 @@
     <meta http-equiv="Cache-control" content="public">
 
     {% load static %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'css/stile.css' %}">
+    <link rel="stylesheet" href="{% static 'css/stile_custom.css' %}">
 </head>
 
 <body>
     {% include 'Extra/header.html' %}
-    
-    <div class="main">
-        <nav>
-            <ol>
-                <li><a href="{% url 'home' %}">Home</a></li>
-                <li><a href="{% url 'cliente' %}">Clienti</a></li>
-                <li><a href="{% url 'utenza' %}">Utenze</a></li>
-                <li><a href="{% url 'lettura' %}">Letture</a></li>
-                <li><a href="{% url 'fattura' %}">Fatture</a></li>
-            </ol>
-        </nav>
-        <div id="content">
-           
-            
-            <h3>Introduzione</h3>
-            <p>Questo portale è stato sviluppato per fornire agli addetti dell'erogazione acque un accesso facile e veloce alle informazioni relative al servizio di distribuzione dell'acqua. Il portale consente di effettuare ricerche e visualizzare dati relativi a:</p>
-            <ul>
-                <li>Utenze: Codice (univoco) di utenza, data di apertura, indirizzo di erogazione, città, stato utenza: attiva/inattiva (con data di disattivazione se inattiva), cliente associato;</li>
-                <li>Clienti: Codice (univoco) cliente, ragione sociale, indirizzo di residenza, città, codice fiscale;</li>
-                <li>Letture: Numero lettura, data della lettura, valore letto, utenza a cui si riferisce;</li>
-                <li>Fatture: Numero fattura (univoco), data emissione, imponibile, IVA, totale da pagare, letture fatturate.</li>
-            </ul>
 
-            <h3>Ricerca di valori</h3>
-            <p>Il portale offre una potente funzionalità di ricerca che permette di trovare rapidamente i dati desiderati. È possibile effettuare ricerche per filtri per restringere i risultati della ricerca a un intervallo di date, a un tipo di utenza (attiva o inattiva) o ad un altro criterio specifico.</p>
+    <div class="container-fluid">
+        <div class="main">
+            <div class="row flex-grow-1">
+                <nav class="navbar navbar-expand-lg col-lg-2 col-md-2 col-sm-12">
+                    <ul class="navbar-nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'home' %}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'cliente' %}">Clienti</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'utenza' %}">Utenze</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'lettura' %}">Letture</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'fattura' %}">Fatture</a>
+                        </li>
+                    </ul>
+                </nav>
 
-            <h3>Visualizzazione dei dati</h3>
-            <p>Una volta trovati i dati desiderati, il portale li visualizza in modo chiaro e organizzato.</p>
+                <div id="content" class="col-lg-10 col-md-10 col-sm-12">
+                    <h3>Introduzione</h3>
+                    <p>Questo portale è stato sviluppato per fornire agli addetti dell'erogazione acque un accesso
+                        facile e
+                        veloce alle informazioni relative al servizio di distribuzione dell'acqua. Il portale consente
+                        di
+                        effettuare ricerche e visualizzare dati relativi a:</p>
+                    <ul>
+                        <li>Utenze: Codice (univoco) di utenza, data di apertura, indirizzo di erogazione, città, stato
+                            utenza:
+                            attiva/inattiva (con data di disattivazione se inattiva), cliente associato;</li>
+                        <li>Clienti: Codice (univoco) cliente, ragione sociale, indirizzo di residenza, città, codice
+                            fiscale;
+                        </li>
+                        <li>Letture: Numero lettura, data della lettura, valore letto, utenza a cui si riferisce;</li>
+                        <li>Fatture: Numero fattura (univoco), data emissione, imponibile, IVA, totale da pagare,
+                            letture
+                            fatturate.</li>
+                    </ul>
 
-            <h3>Benefici</h3>
-            <p>Il portale di gestione del servizio di distribuzione acqua offre numerosi vantaggi agli utenti, tra cui:</p>
-            <ul>
-                <li>Accesso rapido e facile alle informazioni: Gli addetti possono trovare le informazioni di cui hanno bisogno in pochi clic;</li>
-                <li>Visualizzazione chiara dei dati: I dati sono visualizzati in modo chiaro e organizzato, facilitando la loro comprensione;</li>
-            </ul>
+                    <h3>Ricerca di valori</h3>
+                    <p>Il portale offre una potente funzionalità di ricerca che permette di trovare rapidamente i dati
+                        desiderati. È possibile effettuare ricerche per filtri per restringere i risultati della ricerca
+                        a un
+                        intervallo di date, a un tipo di utenza (attiva o inattiva) o ad un altro criterio specifico.
+                    </p>
+
+                    <h3>Visualizzazione dei dati</h3>
+                    <p>Una volta trovati i dati desiderati, il portale li visualizza in modo chiaro e organizzato.</p>
+
+                    <h3>Benefici</h3>
+                    <p>Il portale di gestione del servizio di distribuzione acqua offre numerosi vantaggi agli utenti,
+                        tra cui:
+                    </p>
+                    <ul>
+                        <li>Accesso rapido e facile alle informazioni: Gli addetti possono trovare le informazioni di
+                            cui hanno
+                            bisogno in pochi clic;</li>
+                        <li>Visualizzazione chiara dei dati: I dati sono visualizzati in modo chiaro e organizzato,
+                            facilitando
+                            la loro comprensione;</li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
-    <div>
-        {% include 'Extra/footer.html' %}
-    </div>
+
+    {% include 'Extra/footer.html' %}
+
 </body>
 
 </html>

@@ -81,7 +81,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'my_programmazionewebunibg',
         'USER': 'root',
-        'PASSWORD': 'bellosigno',
+        'PASSWORD': 'root',
         'HOST': 'localhost',
         'PORT': '3306',
     }
