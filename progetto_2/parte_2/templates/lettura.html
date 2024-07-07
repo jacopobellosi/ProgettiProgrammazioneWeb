@@ -33,12 +33,17 @@
                             <input id="IdCodUtenza" name="CodUtenza" type="number" class="form-control"
                                 placeholder="CodUtenza" value="{{ CodUtenza }}" min="1" />
                         </div>
-                        <div class="col-md-2 custom-column-spacing">
-                            <label for="IdData">Data Lettura: </label>
-                        </div>
-                        <div class="col-md-2">
-                            <input id="IdData" name="Data" type="date" class="form-control" placeholder="Data"
-                                value="{{ Data }}" />
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-auto">
+                                    <label for="IdData" class="col-form-label me-1 custom-column-spacing">Data
+                                        Lettura:</label>
+                                </div>
+                                <div class="col">
+                                    <input id="IdData" name="Data" type="date" class="form-control" placeholder="Data"
+                                        value="{{ Data }}" />
+                                </div>
+                            </div>
                         </div>
                         <div class="w-100 custom-row-break"></div>
                         <div class="col-md-3">
@@ -61,35 +66,35 @@
                         {% if error %}
                         <p style="color:red;">{{ error }}</p>
                         {% else %}
-                        <table class="table" id="myTableLettura">
-                            <tr class="header">
-                                <th onclick="sortTableLettura(0)">Numero</th>
-                                <th onclick="sortTableLettura(1)">Codice Utenza</th>
-                                <th onclick="sortTableLettura(2)">Data Lettura</th>
-                                <th onclick="sortTableLettura(3)">Valore</th>
-                                <th onclick="sortTableLettura(4)">Numero Fattura</th>
-                            </tr>
+                        <table class="table table-bordered table-hover" id="myTableLettura">
+                            <thead class="thead-light">
+                                <tr class="header">
+                                    <th onclick="sortTableLettura(0)">Numero</th>
+                                    <th onclick="sortTableLettura(1)">Codice Utenza</th>
+                                    <th onclick="sortTableLettura(2)">Data Lettura</th>
+                                    <th onclick="sortTableLettura(3)">Valore</th>
+                                    <th onclick="sortTableLettura(4)">Numero Fattura</th>
+                                </tr>
+                            </thead>
                             {% for r in results %}
                             <tr class="riga">
-                                <td class="centerTD"> {{ r.Numero }} </td>
+                                <td class="centerTD">{{ r.Numero }}</td>
                                 <script>
-                                    console.log("{{r.CodUtenza}}")
+                                    console.log("{{ r.CodUtenza }}")
                                 </script>
-                                <td class="centerTD"><a href="{% url 'utenza' %}?Codice={{ r.CodUtenza }}">{{
-                                        r.CodUtenza }} </a></td>
-                                <td> {{ r.Data }} </td>
-                                <td> {{ r.Valore }} </td>
+                                <td class="centerTD"><a href="{% url 'utenza' %}?Codice={{ r.CodUtenza }}">{{ r.CodUtenza }}</a></td>
+                                <td>{{ r.Data }}</td>
+                                <td>{{ r.Valore }}</td>
                                 {% if r.NumFattura %}
-                                <td class="centerTD"><a href="{% url 'fattura' %}?Numero={{ r.NumFattura }}"> {{
-                                        r.NumFattura }} </a></td>
+                                <td class="centerTD"><a href="{% url 'fattura' %}?Numero={{ r.NumFattura }}">{{ r.NumFattura }}</a></td>
                                 {% else %}
-                                <td class="centerTD"> </td>
+                                <td class="centerTD"></td>
                                 {% endif %}
-
                             </tr>
                             {% endfor %}
                         </table>
                         {% endif %}
+
                     </div>
                 </div>
             </div>

@@ -32,56 +32,68 @@
                     <form name="myform" id="searchForm" method="POST" action="{% url 'cliente' %}" class="row g-3">
                         {% csrf_token %}
                         <div class="col-md-3">
-                            <input id="IdCodice" name="Codice" type="number" class="form-control" placeholder="Codice" value="{{ Codice }}" min="1">
+                            <input id="IdCodice" name="Codice" type="number" class="form-control" placeholder="Codice"
+                                value="{{ Codice }}" min="1">
                         </div>
                         <div class="col-md-3">
-                            <input id="IdCF" name="CF" type="text" class="form-control" pattern="[\p{L} \d]+" title="Vietato mettere apici o virgolette" placeholder="Codice Fiscale" value="{{ CF }}">
+                            <input id="IdCF" name="CF" type="text" class="form-control" pattern="[\p{L} \d]+"
+                                title="Vietato mettere apici o virgolette" placeholder="Codice Fiscale"
+                                value="{{ CF }}">
                         </div>
                         <div class="col-md-3">
-                            <input id="IdRagSoc" name="RagSoc" type="text" class="form-control" pattern="[\p{L} \d]+" title="Vietato mettere apici o virgolette" placeholder="Ragione Sociale" value="{{ RagSoc }}">
+                            <input id="IdRagSoc" name="RagSoc" type="text" class="form-control" pattern="[\p{L} \d]+"
+                                title="Vietato mettere apici o virgolette" placeholder="Ragione Sociale"
+                                value="{{ RagSoc }}">
                         </div>
                         <div class="w-100 custom-row-break"></div>
                         <div class="col-md-3">
-                            <input id="IdIndirizzo" name="Indirizzo" type="text" class="form-control" pattern="[\p{L} \d]+" title="Vietato mettere apici o virgolette" placeholder="Indirizzo" value="{{ Indirizzo }}">
+                            <input id="IdIndirizzo" name="Indirizzo" type="text" class="form-control"
+                                pattern="[\p{L} \d]+" title="Vietato mettere apici o virgolette" placeholder="Indirizzo"
+                                value="{{ Indirizzo }}">
                         </div>
                         <div class="col-md-3">
-                            <input id="IdCitta" name="Citta" type="text" class="form-control" pattern="[\p{L} \d]+" title="Vietato mettere apici o virgolette" placeholder="Città" value="{{ Citta }}">
+                            <input id="IdCitta" name="Citta" type="text" class="form-control" pattern="[\p{L} \d]+"
+                                title="Vietato mettere apici o virgolette" placeholder="Città" value="{{ Citta }}">
                         </div>
                         <div class="col-3">
                             <input type="submit" class="btn btn-primary" value="Cerca">
                             <input type="button" id="reset" class="btn btn-secondary" value="Cancella">
                         </div>
                     </form>
-                    
+
                     <hr>
 
                     <div id="results" class="tabella-scorrevole">
                         {% if error %}
                         <p>DB Error on Query: {{ error }}</p>
                         {% else %}
-                        <table class="table" id="myTableCliente">
-                            <tr class="header">
-                                <th onclick="sortTableCliente(0)">Codice</th>
-                                <th onclick="sortTableCliente(1)">Codice Fiscale</th>
-                                <th onclick="sortTableCliente(2)">Ragione Sociale</th>
-                                <th onclick="sortTableCliente(3)">Indirizzo</th>
-                                <th onclick="sortTableCliente(4)">Città</th>
-                                <th onclick="sortTableCliente(5)">Numero Utenze</th>
-                            </tr>
-                            {% for riga in results %}
-                            <tr class="riga">
-                                <td class="centerTD">{{ riga.Codice }}</td>
-                                <td>{{ riga.CF }}</td>
-                                <td>{{ riga.RagSoc }}</td>
-                                <td>{{ riga.Indirizzo }}</td>
-                                <td>{{ riga.Citta }}</td>
-                                <td class="centerTD"><a href="{% url 'utenza' %}?CodCliente={{ riga.Codice }}">{{
-                                        riga.NumeroUtenze }}</a></td>
-                            </tr>
-                            {% endfor %}
+                        <table class="table table-bordered table-hover" id="myTableCliente">
+                            <thead class="thead-light">
+                                <tr class="header">
+                                    <th onclick="sortTableCliente(0)">Codice</th>
+                                    <th onclick="sortTableCliente(1)">Codice Fiscale</th>
+                                    <th onclick="sortTableCliente(2)">Ragione Sociale</th>
+                                    <th onclick="sortTableCliente(3)">Indirizzo</th>
+                                    <th onclick="sortTableCliente(4)">Città</th>
+                                    <th onclick="sortTableCliente(5)">Numero Utenze</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for riga in results %}
+                                <tr class="riga">
+                                    <td class="text-center">{{ riga.Codice }}</td>
+                                    <td>{{ riga.CF }}</td>
+                                    <td>{{ riga.RagSoc }}</td>
+                                    <td>{{ riga.Indirizzo }}</td>
+                                    <td>{{ riga.Citta }}</td>
+                                    <td class="text-center"><a href="{% url 'utenza' %}?CodCliente={{ riga.Codice }}">{{ riga.NumeroUtenze }}</a></td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
                         </table>
                         {% endif %}
                     </div>
+
                 </div>
             </div>
         </div>

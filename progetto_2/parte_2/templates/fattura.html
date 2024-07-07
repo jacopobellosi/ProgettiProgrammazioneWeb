@@ -32,23 +32,34 @@
                     <form name="myform" id="searchForm" method="POST" action="{% url 'fattura' %}" class="row g-3">
                         {% csrf_token %}
                         <div class="col-md-3">
-                            <input id="IdNumero" name="Numero" type="number" class="form-control" placeholder="Numero" value="{{ Numero }}"
-                                min="1" />
+                            <input id="IdNumero" name="Numero" type="number" class="form-control" placeholder="Numero"
+                                value="{{ Numero }}" min="1" />
                         </div>
-                        <div class="col-md-3">
-                            <input id="IdData" name="Data" type="date" class="form-control" placeholder="Data" value="{{ Data }}" />
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-auto">
+                                    <label for="IdData" class="col-form-label me-1 custom-column-spacing">Data
+                                        Fattura:</label>
+                                </div>
+                                <div class="col">
+                                    <input id="IdData" name="Data" type="date" class="form-control" placeholder="Data"
+                                        value="{{ Data }}" />
+                                </div>
+                            </div>
                         </div>
+
                         <div class="col-md-3">
-                            <input id="IdImponibile" name="Imponibile" type="number" class="form-control" placeholder="Imponibile"
-                                value="{{ Imponibile }}" min="1" />
+                            <input id="IdImponibile" name="Imponibile" type="number" class="form-control"
+                                placeholder="Imponibile" value="{{ Imponibile }}" min="1" />
                         </div>
                         <div class="w-100 custom-row-break"></div>
                         <div class="col-md-3">
-                            <input id="IdIva" name="Iva" type="number" class="form-control" placeholder="Iva" value="{{ Iva }}" min="1" />
+                            <input id="IdIva" name="Iva" type="number" class="form-control" placeholder="Iva"
+                                value="{{ Iva }}" min="1" />
                         </div>
                         <div class="col-md-3">
-                            <input id="IdTotale" name="Totale" type="number" class="form-control" placeholder="Totale" value="{{ Totale }}"
-                                min="1" />
+                            <input id="IdTotale" name="Totale" type="number" class="form-control" placeholder="Totale"
+                                value="{{ Totale }}" min="1" />
                         </div>
                         <div class="col-md-3">
                             <input type="submit" class="btn btn-primary" value="Cerca" />
@@ -61,15 +72,17 @@
                         {% if error %}
                         <p>DB Error on Query: {{ error }}</p>
                         {% else %}
-                        <table class="table" id="myTableFattura">
-                            <tr class="header">
-                                <th onclick="sortTableFattura(0)">Numero</th>
-                                <th onclick="sortTableFattura(1)">Data</th>
-                                <th onclick="sortTableFattura(2)">Imponibile</th>
-                                <th onclick="sortTableFattura(3)">Iva</th>
-                                <th onclick="sortTableFattura(4)">Totale</th>
-                                <th onclick="sortTableFattura(5)">Numero Letture</th>
-                            </tr>
+                        <table class="table table-bordered table-hover" id="myTableFattura">
+                            <thead class="thead-light">
+                                <tr class="header">
+                                    <th onclick="sortTableFattura(0)">Numero</th>
+                                    <th onclick="sortTableFattura(1)">Data</th>
+                                    <th onclick="sortTableFattura(2)">Imponibile</th>
+                                    <th onclick="sortTableFattura(3)">Iva</th>
+                                    <th onclick="sortTableFattura(4)">Totale</th>
+                                    <th onclick="sortTableFattura(5)">Numero Letture</th>
+                                </tr>
+                            </thead>
                             {% for riga in results %}
                             <tr class="riga">
                                 <td class="centerTD">{{ riga.Numero }}</td>
@@ -77,8 +90,7 @@
                                 <td>{{ riga.Imponibile }}</td>
                                 <td>{{ riga.Iva }}</td>
                                 <td>{{ riga.Totale }}</td>
-                                <td class="centerTD"><a href="{% url 'lettura' %}?NumFattura={{ riga.Numero }}">{{
-                                        riga.NumeroLetture }}</a></td>
+                                <td class="centerTD"><a href="{% url 'lettura' %}?NumFattura={{ riga.Numero }}">{{ riga.NumeroLetture }}</a></td>
                             </tr>
                             {% endfor %}
                         </table>
