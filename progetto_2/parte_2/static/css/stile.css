@@ -215,10 +215,11 @@ a:hover {
 	border-color: magenta;
 }
 */
-h3 {
+
+/*h3 {
 	margin-top: 12px;
 	margin-bottom: 7px;
-}
+}*/
 
 /*h4 {
 	margin-top: -3px;
@@ -350,7 +351,7 @@ footer {
 }
 */
 
-/*responsive*/
+/*responsive
 @media only screen and (min-width: 960px) and (max-width: 1100px) {
 	.imgTitle {
 		height: 100px;
@@ -874,4 +875,4 @@ footer {
 	.errore input[type="button"] {
 		font-size: 11px;
 	}
-}
+}*/

@@ -27,7 +27,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content errore">
                 <div class="modal-header titoloErr">
-                    <h2 class="modal-title"><u>ATTENZIONE!</u></h2>
+                    <h2 class="modal-title">ATTENZIONE!</h2>
                 </div>
                 <div class="modal-body contErr">
                     <p>Sei veramente sicuro di voler elimare questa utenza?</p>
@@ -152,12 +152,14 @@
                                 <td>{{ riga.Città }}</td>
                                 <td class="centerTD"><a href="{% url 'cliente' %}?RagSoc={{ riga.RagSoc }}">{{ riga.RagSoc }} - Cod:{{ riga.CodCliente }}</a> </td>
                                 <td class="centerTD">
-                                    <input id="IdAttiva" name="Attiva" type="checkbox" {% if riga.Attiva %}checked{%
-                                        endif %} disabled />
+                                    {% if riga.Attiva %}
+                                    <input id="IdAttiva" name="Attiva" type="checkbox" checked disabled />
+                                    {% else %}
+                                    <input id="IdAttiva" name="Attiva" type="checkbox" disabled />
+                                    {% endif %}
                                 </td>
-                                {% endif %}
                                 <td>
-                                    {% if riga.DataCh == None %}
+                                {% if riga.DataCh == None %}
                                 </td>
                                 {% else %}
                                 {{ riga.DataCh }}</td>
