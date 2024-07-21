@@ -498,7 +498,7 @@ footer {
     
     .smalltable {
         border: 1px solid #e967ed;
-        width: 100%;
+        width: max-content;
     }
     
     .footerText {
@@ -637,7 +637,7 @@ footer {
     
     .smalltable {
         border: 1px solid #e967ed;
-        width: 100%;
+        width: max-content;
     }
     
     .footerText {
