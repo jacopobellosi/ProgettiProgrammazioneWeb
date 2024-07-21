@@ -11,7 +11,6 @@
     {% load static %}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'css/stile.css' %}">
     <link rel="stylesheet" href="{% static 'css/stile_custom.css' %}">
 
     <link rel="icon" href="{% static 'img/logo.jpeg' %}" type="image/x-icon" alt="Logo" />
@@ -25,7 +24,6 @@
             <div class="row flex-grow-1">
                 {% include 'Extra/nav.html' %}
                 <div id="content" class="col-lg-10 col-md-10 col-sm-12">
-
                     <h2>Clienti</h2>
                     <hr>
                     <h4>Filtri:</h4>
@@ -55,7 +53,7 @@
                             <input id="IdCitta" name="Citta" type="text" class="form-control" pattern="[\p{L} \d]+"
                                 title="Vietato mettere apici o virgolette" placeholder="Città" value="{{ Citta }}">
                         </div>
-                        <div class="col-3">
+                        <div class="col-md-3 pulsanti">
                             <input type="submit" class="btn btn-primary" value="Cerca">
                             <input type="button" id="reset" class="btn btn-secondary" value="Cancella">
                         </div>

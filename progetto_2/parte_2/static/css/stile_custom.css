@@ -1,13 +1,13 @@
 @charset "utf-8";
 
 html {
-	height: 100%;
+    height: 100%;
 }
 
 body {
-	background-color: #fdd7fd;
-	height: auto;
-	font-family: Arial, sans-serif;
+    background-color: #fdd7fd;
+    height: auto;
+    font-family: Arial, sans-serif;
 }
 
 /*header*/
@@ -120,16 +120,16 @@ body {
     margin-left: auto;
     margin-right: auto;
     padding-left: 12px;
-    border: 3px solid magenta;
+    border: 0.25vw solid magenta;
     background-color: white;
-    border-radius: 10px;
+    border-radius: 1vw;
 }
 
 /*nav*/
 .navbar {
     background-color: #ff80ff;
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
+    border-top-left-radius: 1vw;
+    border-bottom-left-radius: 1vw;
     display: flex;
     flex-direction: column;
     padding: 0;
@@ -166,14 +166,14 @@ body {
     padding-right: 20px;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
-    height: 500px; /*sarebbe da sistemare no pixel*/
+    height: 68vh;
 }
 
 #content h3 {
     font-size: 1.4vw;
     font-weight: bold;
     margin-top: 12px;
-	margin-bottom: 7px;
+    margin-bottom: 7px;
 }
 
 #content p,
@@ -189,7 +189,7 @@ h2 {
 }
 
 hr {
-	background-color: magenta;
+    background-color: magenta;
     height: 1.5px;
     opacity: 1;
     margin-top: 7px;
@@ -207,15 +207,15 @@ h4 {
 
 /*aggiunta utenza*/
 .iconaPiu {
-	width: 33%;
-	float: right;
+    width: 33%;
+    float: right;
     margin-top: 13px;
     margin-right: 5px;
-	cursor: pointer;
+    cursor: pointer;
 }
 
 .iconaPiu:hover {
-	filter: hue-rotate(352deg) brightness(0.8);
+    filter: hue-rotate(352deg) brightness(0.8);
 }
 
 /*filtri*/
@@ -231,22 +231,31 @@ input[type="button"] {
     font-size: 0.9vw !important;
     padding: 3px 9px !important;
     background-color: magenta;
-	border-color: magenta;
-	color: black;
-	font-weight: bold;
-	background-color: transparent;
-	border-radius: 10px;
-	border: 3px solid magenta;
-	box-shadow: inset 0 0 2px rgba(0, 0, 0, 1);
-	transition: background-color 0.3s, border-color 0.3s;
+    border-color: magenta;
+    color: black;
+    font-weight: bold;
+    background-color: transparent;
+    border-radius: 10px;
+    border: 0.2vw solid magenta;
+    box-shadow: inset 0 0 2px rgba(0, 0, 0, 1);
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.pulsanti {
+    margin-top: 1vw;
+    margin-left: 1vw;
 }
 
 input[type="submit"]:hover,
 input[type="button"]:hover {
-	background-color: darkmagenta;
-	border-color: darkmagenta;
-	color: white;
-	text-shadow: -0.8px 0 black, 0 0.8px black, 0.8px 0 black, 0 -0.8px black;
+    background-color: darkmagenta;
+    border-color: darkmagenta;
+    color: white;
+    text-shadow: -0.8px 0 black, 0 0.8px black, 0.8px 0 black, 0 -0.8px black;
+}
+
+form input[type="checkbox"] {
+    width: 1vw;
 }
 
 .custom-row-break {
@@ -255,6 +264,8 @@ input[type="button"]:hover {
 
 .custom-column-spacing {
     padding-top: 4.5px;
+    margin-left: 1vw;
+    margin-right: -10px;
 }
 
 .custom-column-spacing-check {
@@ -296,7 +307,7 @@ td input[type="number"] {
 }
 
 .tabella-scorrevole {
-    max-height: 60%;
+    max-height: 40vh;
     overflow-y: auto;
     border: 1px solid #ccc;
 }
@@ -312,8 +323,10 @@ td input[type="number"] {
 }
 
 .table th {
-    position: -webkit-sticky; /* Safari */
-    position: sticky; /* Per tutti gli altri browser */
+    position: -webkit-sticky;
+    /* Safari */
+    position: sticky;
+    /* Per tutti gli altri browser */
     top: 0;
     background: #fdd7fd;
 }
@@ -324,7 +337,8 @@ td input[type="number"] {
 }
 
 .header {
-    background: #ff99ff; /*non va*/
+    background: #ff99ff;
+    /*non va*/
     color: rgb(108, 12, 119);
 }
 
@@ -333,11 +347,11 @@ td input[type="number"] {
 }
 
 a {
-	color: magenta;
+    color: magenta;
 }
 
 a:hover {
-	color: darkmagenta;
+    color: darkmagenta;
 }
 
 
@@ -350,4 +364,288 @@ a:hover {
 footer {
     background-color: #ba0dbd;
     margin-top: 100px;
+}
+
+
+/*responsive*/
+@media only screen and (max-width: 768px) and (min-width: 420px){
+    header {
+        padding-bottom: 0rem !important;
+    }
+
+    #h1Title {
+        font-size: 8vw;
+        text-shadow: 0.6vw 0.6vw 0.6vw rgba(0, 0, 0, 0.5);
+        padding-bottom: 0px;
+    }
+
+    .logo {
+        max-width: 25vw;
+    }
+
+    .main {
+        border: 0.6vw solid magenta;
+        background-color: white;
+        border-radius: 1.5vw;
+    }
+
+    .navbar {
+        border-top-left-radius: 1.5vw;
+        border-top-right-radius: 1.5vw;
+        border-bottom-left-radius: 0;
+        width: calc(100% - 12px);
+    }
+
+    .navbar-nav {
+        width: auto;
+    }
+
+    .nav-link {
+        font-size: 3vw;
+        padding: 1vw;
+    }
+
+    .nav-link:hover {
+        border-top-left-radius: 1.5vw;
+        border-top-right-radius: 1.5vw;
+        border-bottom-left-radius: 0;
+    }
+
+    #content {
+        font-size: 2vw;
+        border-bottom-left-radius: 1.5vw;
+        border-bottom-right-radius: 1.5vw;
+        height: 165vw;
+    }
+
+    #content h3 {
+        font-size: 3vw;
+        margin-top: 10px;
+        margin-bottom: 7px;
+    }
+
+    #content p,
+    #content li {
+        font-size: 2.5vw;
+    }
+
+    h2 {
+        font-size: 4vw;
+        padding-top: 8px;
+    }
+
+    h4 {
+        font-size: 2.7vw;
+    }
+
+    .iconaPiu {
+        width: 3vw;
+    }
+
+    input[type="text"],
+    input[type="date"],
+    input[type="number"] {
+        font-size: 2.3vw !important;
+    }
+
+    label {
+        font-size: 2.3vw !important;
+    }
+
+    input[type="submit"],
+    input[type="button"] {
+        font-size: 2.3vw !important;
+        margin-right: 1vw;
+        border: 0.6vw solid magenta;
+    }
+
+    form input[type="checkbox"] {
+        width: 2.8vw;
+    }
+
+    .custom-column-spacing-check {
+        margin-right: 0;
+    }
+
+    td {
+        padding-left: 5px;
+    }
+    
+    .text-center {
+        padding-left: 0px;
+        text-align: center;
+    }
+    
+    td input[type="text"],
+    td input[type="date"],
+    td input[type="number"] {
+        width: 92%;
+        font-size: inherit;
+        padding-left: 0px;
+    }
+
+    .icona {
+        width: 4vw;
+    }
+    
+    .tabella-scorrevole {
+        max-height: 85vw;
+    }
+    
+    .tabella-scorrevole-utenza {
+        max-height: 60vw;
+    }
+    
+    .smalltable {
+        border: 1px solid #e967ed;
+        width: 100%;
+    }
+    
+    .footerText {
+        font-size: 3vw;
+    }
+
+    .text-center {
+        position: relative;
+        margin-top: 30px;
+    }
+}
+
+@media only screen and (max-width: 420px){
+    header {
+        padding-bottom: 0rem !important;
+    }
+
+    #h1Title {
+        font-size: 8vw;
+        text-shadow: 0.6vw 0.6vw 0.6vw rgba(0, 0, 0, 0.5);
+        padding-bottom: 0px;
+    }
+
+    .logo {
+        max-width: 25vw;
+    }
+
+    .main {
+        border: 0.6vw solid magenta;
+        background-color: white;
+        border-radius: 1.5vw;
+    }
+
+    .navbar {
+        border-top-left-radius: 1.5vw;
+        border-top-right-radius: 1.5vw;
+        border-bottom-left-radius: 0;
+        width: calc(100% - 12px);
+    }
+
+    .navbar-nav {
+        width: auto;
+    }
+
+    .nav-link {
+        font-size: 3vw;
+        padding: 1vw;
+    }
+
+    .nav-link:hover {
+        border-top-left-radius: 1.5vw;
+        border-top-right-radius: 1.5vw;
+        border-bottom-left-radius: 0;
+    }
+
+    #content {
+        font-size: 2vw;
+        border-bottom-left-radius: 1.5vw;
+        border-bottom-right-radius: 1.5vw;
+        height: 110vh;
+    }
+
+    #content h3 {
+        font-size: 3vw;
+        margin-top: 10px;
+        margin-bottom: 7px;
+    }
+
+    #content p,
+    #content li {
+        font-size: 2.5vw;
+    }
+
+    h2 {
+        font-size: 4vw;
+        padding-top: 8px;
+    }
+
+    h4 {
+        font-size: 2.7vw;
+    }
+
+    .iconaPiu {
+        width: 3vw;
+    }
+
+    input[type="text"],
+    input[type="date"],
+    input[type="number"] {
+        font-size: 2.3vw !important;
+    }
+
+    label {
+        font-size: 2.3vw !important;
+    }
+
+    input[type="submit"],
+    input[type="button"] {
+        font-size: 2.3vw !important;
+        margin-right: 1vw;
+        border: 0.6vw solid magenta;
+    }
+
+    form input[type="checkbox"] {
+        width: 2.8vw;
+    }
+
+    td {
+        padding-left: 5px;
+    }
+    
+    .text-center {
+        padding-left: 0px;
+        text-align: center;
+    }
+    
+    td input[type="text"],
+    td input[type="date"],
+    td input[type="number"] {
+        width: 92%;
+        font-size: inherit;
+        padding-left: 0px;
+    }
+
+    .icona {
+        width: 4vw;
+    }
+    
+    .tabella-scorrevole {
+        max-height: 59vh;
+    }
+    
+    .tabella-scorrevole-utenza {
+        max-height: 68vw;
+    }
+    
+    .smalltable {
+        border: 1px solid #e967ed;
+        width: 100%;
+    }
+    
+    .footerText {
+        font-size: 3vw;
+    }
+
+    .text-center {
+        position: relative;
+        margin-top: 30px;
+    }
 }

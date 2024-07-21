@@ -27,38 +27,10 @@ function gestioneDataCh() {
   }
 }
 
-function aggiornaHTML() {
-  const larghezzaSchermoCorrente = window.innerWidth;
-
-  if (document.getElementById('IdCodCliente') != null && document.getElementById('IdCodCliente').tagName != "DATALIST") {
-    const primaBr = document.getElementById('IdCodCliente');
-
-    if (larghezzaSchermoCorrente < 960) {
-      const brElementi = primaBr.nextElementSibling;
-
-      if (!brElementi || brElementi.tagName !== 'BR' || brElementi.nextElementSibling.tagName !== 'BR') {
-        primaBr.insertAdjacentHTML('afterend', '<br><br>');
-      }
-    } else {
-      const brElemento1 = primaBr.nextElementSibling;
-      const brElemento2 = brElemento1 && brElemento1.nextElementSibling;
-
-      if (brElemento1 && brElemento1.tagName === 'BR' && brElemento2 && brElemento2.tagName === 'BR') {
-        primaBr.parentNode.removeChild(brElemento1);
-        primaBr.parentNode.removeChild(brElemento2);
-      }
-    }
-  }
-}
-
 const checkbox = document.getElementById('IdAttiva');
 if (checkbox != null) {
   checkbox.addEventListener('change', gestioneDataCh);
 }
-
-const larghezzaSchermoIniziale = window.innerWidth;
-window.addEventListener('resize', aggiornaHTML);
-aggiornaHTML();
 
 function setEliminazione(codice) {
   document.getElementById('Err').style.display = 'block';

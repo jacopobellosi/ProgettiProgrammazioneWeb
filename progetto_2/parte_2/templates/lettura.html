@@ -3,10 +3,14 @@
 
 <head>
     <title>Lettura</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="Gestore database per Distribuzioni Acque">
+    <meta name="author" content="Bellosi Jacopo, Signori Alessandro">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-control" content="no-cache">
     {% load static %}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'css/stile.css' %}">
     <link rel="stylesheet" href="{% static 'css/stile_custom.css' %}">
 
     <link rel="icon" href="{% static 'img/logo.jpeg' %}" type="image/x-icon" alt="Logo" />
@@ -79,9 +83,6 @@
                             {% for r in results %}
                             <tr class="riga">
                                 <td class="centerTD">{{ r.Numero }}</td>
-                                <script>
-                                    console.log("{{ r.CodUtenza }}")
-                                </script>
                                 <td class="centerTD"><a href="{% url 'utenza' %}?Codice={{ r.CodUtenza }}">{{ r.CodUtenza }}</a></td>
                                 <td>{{ r.Data }}</td>
                                 <td>{{ r.Valore }}</td>
