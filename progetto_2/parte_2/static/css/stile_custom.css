@@ -139,10 +139,6 @@ body {
     width: 100%;
 }
 
-.nav-item {
-    width: 100%;
-}
-
 .nav-link {
     color: white;
     font-size: 1.8vw;
@@ -397,7 +393,7 @@ footer {
     }
 
     .navbar-nav {
-        width: auto;
+        width: 100%;
     }
 
     .nav-link {
@@ -540,7 +536,7 @@ footer {
     }
 
     .navbar-nav {
-        width: auto;
+        width: 100%;
     }
 
     .nav-link {
